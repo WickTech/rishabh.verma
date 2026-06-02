@@ -1,0 +1,181 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/*  Design tokens — bold/experimental dark canvas with a warm accent  */
+/* ------------------------------------------------------------------ */
+@theme {
+  /* Surfaces */
+  --color-void: #07070b;
+  --color-ink: #0d0d14;
+  --color-panel: #14141f;
+  --color-line: #232334;
+  --color-line-strong: #34344a;
+
+  /* Text */
+  --color-bone: #f4f1ea;
+  --color-bone-muted: #a8a6b8;
+  --color-bone-faint: #6b6980;
+
+  /* Accent ramp — electric amber → magenta → violet */
+  --color-amber: #ff8a3d;
+  --color-flame: #ff5e3a;
+  --color-magenta: #ff3d8a;
+  --color-violet: #8b5cf6;
+  --color-cyan: #2dd4bf;
+
+  /* Fonts wired up by next/font in layout.tsx */
+  --font-display: var(--font-display), "Arial Black", sans-serif;
+  --font-sans: var(--font-sans), system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, monospace;
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Base                                                              */
+/* ------------------------------------------------------------------ */
+* {
+  border-color: var(--color-line);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-void);
+  color: var(--color-bone);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-magenta);
+  color: var(--color-void);
+}
+
+/* Thin custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-void);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-line-strong);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-amber);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Utilities / treatments                                           */
+/* ------------------------------------------------------------------ */
+
+/* Oversized display headline — tight tracking, heavy weight */
+.display {
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+/* Gradient text fill */
+.text-flux {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-amber),
+    var(--color-magenta) 55%,
+    var(--color-violet)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Outlined (stroked) text — used for big statement words */
+.text-stroke {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-bone-faint);
+}
+@supports not ((-webkit-text-stroke: 1px black)) {
+  .text-stroke {
+    color: var(--color-bone-faint);
+  }
+}
+
+/* Glass panel */
+.glass {
+  background: color-mix(in oklab, var(--color-panel) 70%, transparent);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-line);
+}
+
+/* Animated mesh-gradient backdrop blob */
+.aurora {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(90px);
+  opacity: 0.5;
+  pointer-events: none;
+  will-change: transform;
+  animation: drift 22s var(--ease-out-expo) infinite alternate;
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(6%, -8%, 0) scale(1.15);
+  }
+}
+
+/* Grain overlay */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Marquee ticker */
+.marquee {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marquee 30s linear infinite;
+}
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Reduced motion: kill all the showy stuff */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .aurora,
+  .marquee {
+    animation: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

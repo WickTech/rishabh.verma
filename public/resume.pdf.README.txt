@@ -1,0 +1,6 @@
+Drop your résumé here as `resume.pdf` (same folder).
+
+The "Résumé" / "Download résumé" buttons in the Hero and Contact sections
+link to /resume.pdf. Until you add the real file, that link will 404.
+
+To change the path, edit `resume` in data/profile.ts.
