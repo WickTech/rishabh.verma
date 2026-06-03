@@ -5,7 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import type { Project } from "@/data/projects";
 import { StatusBadge } from "./StatusBadge";
 
-/** Compact card for the "more projects" grid. */
+/** Compact glass card for the "more projects" bento grid. */
 export function ProjectGridItem({ project, index }: { project: Project; index: number }) {
   const reduce = useReducedMotion();
   const [from, to] = project.accent;
@@ -19,13 +19,13 @@ export function ProjectGridItem({ project, index }: { project: Project; index: n
     >
       <Link
         href={`/projects/${project.slug}`}
-        className="group relative flex h-full flex-col gap-4 overflow-hidden rounded-xl border border-line bg-ink p-6 transition-colors hover:border-line-strong"
+        className="glass group relative flex h-full flex-col gap-4 overflow-hidden rounded-xl p-6 transition-colors hover:bg-slate/80"
       >
         {/* accent wash on hover */}
         <span
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-          style={{ background: `radial-gradient(120% 80% at 100% 0%, ${from}1f, transparent 60%)` }}
+          style={{ background: `radial-gradient(120% 80% at 100% 0%, ${from}26, transparent 60%)` }}
         />
 
         <div className="flex items-start justify-between">
@@ -39,8 +39,8 @@ export function ProjectGridItem({ project, index }: { project: Project; index: n
         </div>
 
         <div className="relative">
-          <h3 className="display text-2xl text-bone">{project.name}</h3>
-          <p className="mt-2 text-sm leading-relaxed text-bone-muted">
+          <h3 className="display text-2xl text-on-surface">{project.name}</h3>
+          <p className="mt-2 text-sm leading-relaxed text-text-muted">
             {project.tagline}
           </p>
         </div>
@@ -49,7 +49,7 @@ export function ProjectGridItem({ project, index }: { project: Project; index: n
           {project.stack.slice(0, 3).map((t) => (
             <li
               key={t}
-              className="rounded border border-line px-2 py-0.5 font-mono text-[10px] text-bone-faint"
+              className="rounded-full border border-glass px-2 py-0.5 font-mono text-[10px] text-text-faint"
             >
               {t}
             </li>
@@ -58,8 +58,7 @@ export function ProjectGridItem({ project, index }: { project: Project; index: n
 
         <span
           aria-hidden
-          className="relative font-mono text-xs text-bone-faint transition-colors group-hover:text-amber"
-          style={{ color: undefined }}
+          className="relative font-mono text-xs text-text-faint transition-colors group-hover:text-primary"
         >
           View →
         </span>

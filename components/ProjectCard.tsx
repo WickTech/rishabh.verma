@@ -8,8 +8,8 @@ import { StackChips } from "./StackChips";
 
 /**
  * Large featured project card. Alternates left/right on wide screens.
- * The visual half is a gradient "poster" with the product glyph; the
- * content half carries name, blurb, stack, highlights and links.
+ * The visual half is a glass gradient "poster" with the product glyph; the
+ * content half carries name, blurb, stack, role and links.
  */
 export function ProjectCard({ project, index }: { project: Project; index: number }) {
   const reduce = useReducedMotion();
@@ -28,11 +28,11 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
       <Link
         href={`/projects/${project.slug}`}
         aria-label={`${project.name} — view case study`}
-        className={`relative flex aspect-[16/10] items-center justify-center overflow-hidden rounded-2xl border border-line ${
+        className={`relative flex aspect-[16/10] items-center justify-center overflow-hidden rounded-xl border border-glass border-t-white/10 ${
           flip ? "lg:order-2" : ""
         }`}
         style={{
-          backgroundImage: `radial-gradient(120% 120% at 0% 0%, ${from}33, transparent 55%), radial-gradient(120% 120% at 100% 100%, ${to}33, transparent 55%), linear-gradient(160deg, #14141f, #0d0d14)`,
+          backgroundImage: `radial-gradient(120% 120% at 0% 0%, ${from}33, transparent 55%), radial-gradient(120% 120% at 100% 100%, ${to}33, transparent 55%), linear-gradient(160deg, #1d1836, #0a0d1c)`,
         }}
       >
         <span
@@ -58,34 +58,34 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
       <div className={`flex flex-col justify-center gap-5 ${flip ? "lg:order-1" : ""}`}>
         <div className="flex items-center gap-3">
           <StatusBadge status={project.status} />
-          <span className="font-mono text-xs text-bone-faint">{project.year}</span>
+          <span className="font-mono text-xs text-text-faint">{project.year}</span>
         </div>
 
         <div>
-          <h3 className="display text-4xl text-bone sm:text-5xl">
+          <h3 className="display text-4xl text-on-surface sm:text-5xl">
             <Link
               href={`/projects/${project.slug}`}
-              className="bg-gradient-to-r from-bone to-bone bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 hover:bg-[length:100%_2px]"
+              className="bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 hover:bg-[length:100%_2px]"
               style={{ backgroundImage: `linear-gradient(90deg, ${from}, ${to})` }}
             >
               {project.name}
             </Link>
           </h3>
-          <p className="mt-3 max-w-md text-base leading-relaxed text-bone-muted">
+          <p className="mt-3 max-w-md text-base leading-relaxed text-text-muted">
             {project.tagline}
           </p>
         </div>
 
         <StackChips stack={project.stack} />
 
-        <p className="font-mono text-xs uppercase tracking-wider text-bone-faint">
+        <p className="font-mono text-xs uppercase tracking-wider text-text-faint">
           {project.role}
         </p>
 
         <div className="mt-1 flex flex-wrap items-center gap-4">
           <Link
             href={`/projects/${project.slug}`}
-            className="inline-flex items-center gap-2 text-sm font-semibold text-bone transition-colors hover:text-amber"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-on-surface transition-colors hover:text-primary"
           >
             Case study
             <span aria-hidden>→</span>
@@ -95,7 +95,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
               href={project.links.live}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm text-bone-muted transition-colors hover:text-bone"
+              className="inline-flex items-center gap-1.5 text-sm text-text-muted transition-colors hover:text-on-surface"
             >
               Live ↗
             </a>
@@ -105,7 +105,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
               href={project.links.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm text-bone-muted transition-colors hover:text-bone"
+              className="inline-flex items-center gap-1.5 text-sm text-text-muted transition-colors hover:text-on-surface"
             >
               GitHub ↗
             </a>

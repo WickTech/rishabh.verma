@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { profile } from "@/data/profile";
 import { projects } from "@/data/projects";
 
-const NOW_BUILDING = projects.map((p) => `${p.emoji} ${p.name}`);
+const SHIPPED = projects.map((p) => `${p.emoji} ${p.name}`);
 
 export function Hero() {
   const reduce = useReducedMotion();
@@ -19,42 +19,44 @@ export function Hero() {
   };
 
   return (
-    <section className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden px-5 pt-24 pb-16 sm:px-8">
-      {/* Aurora blobs */}
+    <section
+      id="hero"
+      className="content-layer relative flex min-h-[100svh] flex-col justify-center overflow-hidden px-5 pt-28 pb-16 sm:px-8"
+    >
+      {/* Faint ambient blobs reinforcing the deep-space lighting */}
       <div className="absolute inset-0 -z-10">
         <div
-          className="aurora left-[-10%] top-[10%] h-[42vw] w-[42vw]"
-          style={{ background: "radial-gradient(circle, #ff5e3a, transparent 70%)" }}
+          className="aurora left-[-10%] top-[12%] h-[40vw] w-[40vw]"
+          style={{ background: "radial-gradient(circle, #0070f3, transparent 70%)" }}
         />
         <div
-          className="aurora right-[-8%] top-[30%] h-[38vw] w-[38vw]"
+          className="aurora right-[-8%] top-[34%] h-[36vw] w-[36vw]"
           style={{
-            background: "radial-gradient(circle, #8b5cf6, transparent 70%)",
-            animationDelay: "-6s",
-          }}
-        />
-        <div
-          className="aurora bottom-[-10%] left-[30%] h-[34vw] w-[34vw]"
-          style={{
-            background: "radial-gradient(circle, #ff3d8a, transparent 70%)",
-            animationDelay: "-12s",
+            background: "radial-gradient(circle, #d16bff, transparent 70%)",
+            animationDelay: "-8s",
           }}
         />
       </div>
 
       <div className="mx-auto w-full max-w-6xl">
-        <motion.p
+        {/* "System Initialized" status chip */}
+        <motion.div
           custom={0}
           variants={line}
           initial="hidden"
           animate="show"
-          className="mb-6 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.3em] text-bone-muted"
+          className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1"
         >
-          <span className="h-px w-10 bg-amber" />
-          {profile.role}
-        </motion.p>
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
+          </span>
+          <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-primary">
+            {profile.role}
+          </span>
+        </motion.div>
 
-        <h1 className="display text-[clamp(2.75rem,11vw,9rem)]">
+        <h1 className="display text-[clamp(2.5rem,9vw,7rem)] text-on-surface">
           {profile.headline.map((ln, i) => (
             <motion.span
               key={ln}
@@ -64,7 +66,11 @@ export function Hero() {
               animate="show"
               className="block"
             >
-              <span className={i === profile.headline.length - 1 ? "text-flux" : "text-bone"}>
+              <span
+                className={
+                  i === profile.headline.length - 1 ? "text-flux" : "text-on-surface"
+                }
+              >
                 {ln}
               </span>
             </motion.span>
@@ -76,7 +82,7 @@ export function Hero() {
           variants={line}
           initial="hidden"
           animate="show"
-          className="mt-8 max-w-xl text-lg leading-relaxed text-bone-muted"
+          className="mt-8 max-w-xl text-lg leading-relaxed text-text-muted"
         >
           {profile.tagline}
         </motion.p>
@@ -90,7 +96,7 @@ export function Hero() {
         >
           <a
             href="#work"
-            className="group inline-flex items-center gap-2 rounded-full bg-bone px-6 py-3 text-sm font-semibold text-void transition-transform hover:scale-[1.03]"
+            className="group inline-flex items-center gap-2 rounded bg-gradient-to-r from-electric-blue to-soft-purple px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
           >
             See the work
             <span className="transition-transform group-hover:translate-x-1">→</span>
@@ -99,22 +105,22 @@ export function Hero() {
             href={profile.resume}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-line-strong px-6 py-3 text-sm font-semibold text-bone transition-colors hover:border-amber hover:text-amber"
+            className="inline-flex items-center gap-2 rounded border border-glass px-6 py-3 text-sm font-semibold text-on-surface transition-all hover:border-primary hover:shadow-[0_0_15px_rgba(209,188,255,0.2)]"
           >
             Résumé
           </a>
         </motion.div>
       </div>
 
-      {/* Now-building ticker pinned to the bottom */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 border-t border-line bg-void/40 py-3 backdrop-blur-sm">
+      {/* Now-shipped ticker pinned to the bottom */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 border-t border-glass bg-surface/40 py-3 backdrop-blur-sm">
         <div className="flex items-center">
-          <span className="z-10 shrink-0 bg-void/0 px-5 font-mono text-[11px] uppercase tracking-[0.3em] text-amber sm:px-8">
+          <span className="z-10 shrink-0 px-5 font-mono text-[11px] uppercase tracking-[0.3em] text-primary sm:px-8">
             Shipped&nbsp;/
           </span>
           <div className="overflow-hidden">
-            <div className="marquee gap-10 font-mono text-[11px] uppercase tracking-widest text-bone-faint">
-              {[...NOW_BUILDING, ...NOW_BUILDING].map((item, i) => (
+            <div className="marquee gap-10 font-mono text-[11px] uppercase tracking-widest text-text-faint">
+              {[...SHIPPED, ...SHIPPED].map((item, i) => (
                 <span key={i} className="px-3">
                   {item}
                 </span>

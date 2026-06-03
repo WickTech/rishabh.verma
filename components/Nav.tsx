@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 import { profile } from "@/data/profile";
 
 const LINKS = [
+  { href: "/#expertise", label: "Expertise" },
   { href: "/#work", label: "Work" },
-  { href: "/#more", label: "More" },
-  { href: "/#about", label: "About" },
+  { href: "/#about", label: "Philosophy" },
   { href: "/#contact", label: "Contact" },
 ];
 
@@ -23,24 +23,26 @@ export function Nav() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        scrolled ? "border-b border-line bg-void/80 backdrop-blur-md" : "border-b border-transparent"
+      className={`content-layer fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+        scrolled
+          ? "border-b border-glass bg-surface/70 backdrop-blur-xl"
+          : "border-b border-transparent"
       }`}
     >
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
+      <nav className="mx-auto flex h-20 max-w-6xl items-center justify-between px-5 sm:px-8">
         <Link
           href="/"
-          className="display text-lg tracking-tight text-bone transition-opacity hover:opacity-70"
+          className="display text-lg font-bold tracking-tight text-on-surface transition-opacity hover:opacity-70"
         >
-          RV<span className="text-flux">.</span>
+          {profile.name}
         </Link>
 
-        <ul className="hidden items-center gap-8 sm:flex">
+        <ul className="hidden items-center gap-8 md:flex">
           {LINKS.map((l) => (
             <li key={l.href}>
               <a
                 href={l.href}
-                className="font-mono text-xs uppercase tracking-widest text-bone-muted transition-colors hover:text-bone"
+                className="font-mono text-xs uppercase tracking-widest text-text-muted transition-colors hover:text-primary"
               >
                 {l.label}
               </a>
@@ -50,9 +52,9 @@ export function Nav() {
 
         <a
           href={`mailto:${profile.email}`}
-          className="rounded-full border border-line-strong px-4 py-1.5 font-mono text-xs uppercase tracking-widest text-bone transition-colors hover:border-amber hover:text-amber"
+          className="rounded bg-gradient-to-r from-electric-blue to-soft-purple px-5 py-2 font-mono text-xs uppercase tracking-widest text-white transition-opacity hover:opacity-90"
         >
-          Let&apos;s talk
+          Hire me
         </a>
       </nav>
     </header>
