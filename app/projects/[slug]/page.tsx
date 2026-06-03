@@ -66,12 +66,12 @@ export default async function ProjectPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Nav />
-      <main className="px-5 pt-28 sm:px-8">
+      <main className="content-layer px-5 pt-32 sm:px-8">
         <article className="mx-auto max-w-4xl">
           {/* Back */}
           <Link
             href="/#work"
-            className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-bone-faint transition-colors hover:text-bone"
+            className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-text-faint transition-colors hover:text-primary"
           >
             ← All work
           </Link>
@@ -80,7 +80,7 @@ export default async function ProjectPage({
           <header className="mt-8">
             <div className="mb-5 flex items-center gap-3">
               <StatusBadge status={project.status} />
-              <span className="font-mono text-xs text-bone-faint">{project.year}</span>
+              <span className="font-mono text-xs text-text-faint">{project.year}</span>
             </div>
             <div className="flex items-center gap-5">
               <span aria-hidden className="text-6xl sm:text-7xl">
@@ -90,16 +90,16 @@ export default async function ProjectPage({
                 <span className="text-flux">{project.name}</span>
               </h1>
             </div>
-            <p className="mt-6 max-w-2xl text-xl leading-relaxed text-bone-muted">
+            <p className="mt-6 max-w-2xl text-xl leading-relaxed text-text-muted">
               {project.tagline}
             </p>
           </header>
 
           {/* Poster band */}
           <div
-            className="mt-12 flex aspect-[2/1] items-center justify-center overflow-hidden rounded-2xl border border-line"
+            className="mt-12 flex aspect-[2/1] items-center justify-center overflow-hidden rounded-xl border border-glass border-t-white/10"
             style={{
-              backgroundImage: `radial-gradient(120% 120% at 0% 0%, ${from}33, transparent 55%), radial-gradient(120% 120% at 100% 100%, ${to}33, transparent 55%), linear-gradient(160deg, #14141f, #0d0d14)`,
+              backgroundImage: `radial-gradient(120% 120% at 0% 0%, ${from}33, transparent 55%), radial-gradient(120% 120% at 100% 100%, ${to}33, transparent 55%), linear-gradient(160deg, #1d1836, #0a0d1c)`,
             }}
           >
             <span aria-hidden className="text-[clamp(5rem,18vw,11rem)]">
@@ -108,21 +108,21 @@ export default async function ProjectPage({
           </div>
 
           {/* Meta grid */}
-          <div className="mt-12 grid gap-8 border-y border-line py-8 sm:grid-cols-3">
+          <div className="mt-12 grid gap-8 border-y border-glass py-8 sm:grid-cols-3">
             <div>
-              <h2 className="mb-2 font-mono text-xs uppercase tracking-[0.3em] text-bone-faint">
+              <h2 className="mb-2 font-mono text-xs uppercase tracking-[0.3em] text-primary">
                 Role
               </h2>
-              <p className="text-bone">{project.role}</p>
+              <p className="text-on-surface">{project.role}</p>
             </div>
             <div>
-              <h2 className="mb-2 font-mono text-xs uppercase tracking-[0.3em] text-bone-faint">
+              <h2 className="mb-2 font-mono text-xs uppercase tracking-[0.3em] text-primary">
                 Status
               </h2>
-              <p className="text-bone">{STATUS_LABEL[project.status]}</p>
+              <p className="text-on-surface">{STATUS_LABEL[project.status]}</p>
             </div>
             <div>
-              <h2 className="mb-2 font-mono text-xs uppercase tracking-[0.3em] text-bone-faint">
+              <h2 className="mb-2 font-mono text-xs uppercase tracking-[0.3em] text-primary">
                 Links
               </h2>
               <div className="flex flex-wrap gap-x-4 gap-y-1">
@@ -131,7 +131,7 @@ export default async function ProjectPage({
                     href={project.links.live}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-bone transition-colors hover:text-amber"
+                    className="text-on-surface transition-colors hover:text-primary"
                   >
                     Live ↗
                   </a>
@@ -141,13 +141,13 @@ export default async function ProjectPage({
                     href={project.links.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-bone transition-colors hover:text-amber"
+                    className="text-on-surface transition-colors hover:text-primary"
                   >
                     GitHub ↗
                   </a>
                 )}
                 {!project.links.live && !project.links.github && (
-                  <span className="text-bone-faint">
+                  <span className="text-text-faint">
                     {project.status === "wip" ? "Coming soon" : "Private"}
                   </span>
                 )}
@@ -157,22 +157,22 @@ export default async function ProjectPage({
 
           {/* Overview */}
           <section className="mt-12">
-            <h2 className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-bone-faint">
+            <h2 className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-primary">
               Overview
             </h2>
-            <p className="max-w-2xl text-lg leading-relaxed text-bone">
+            <p className="max-w-2xl text-lg leading-relaxed text-on-surface">
               {project.description}
             </p>
           </section>
 
           {/* Highlights */}
           <section className="mt-12">
-            <h2 className="mb-5 font-mono text-xs uppercase tracking-[0.3em] text-bone-faint">
+            <h2 className="mb-5 font-mono text-xs uppercase tracking-[0.3em] text-primary">
               What it does
             </h2>
             <ul className="flex flex-col gap-3">
               {project.highlights.map((h) => (
-                <li key={h} className="flex gap-3 text-bone-muted">
+                <li key={h} className="flex gap-3 text-text-muted">
                   <span
                     aria-hidden
                     className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full"
@@ -186,7 +186,7 @@ export default async function ProjectPage({
 
           {/* Stack */}
           <section className="mt-12">
-            <h2 className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-bone-faint">
+            <h2 className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-primary">
               Built with
             </h2>
             <StackChips stack={project.stack} />
@@ -195,19 +195,19 @@ export default async function ProjectPage({
           {/* Next project */}
           <Link
             href={`/projects/${next.slug}`}
-            className="group mt-20 flex items-center justify-between gap-6 border-t border-line py-10 transition-colors hover:border-line-strong"
+            className="group mt-20 flex items-center justify-between gap-6 border-t border-glass py-10 transition-colors hover:border-line-strong"
           >
             <div>
-              <span className="font-mono text-xs uppercase tracking-[0.3em] text-bone-faint">
+              <span className="font-mono text-xs uppercase tracking-[0.3em] text-primary">
                 Next project
               </span>
-              <p className="display mt-2 text-3xl text-bone transition-colors group-hover:text-amber sm:text-4xl">
+              <p className="display mt-2 text-3xl text-on-surface transition-colors group-hover:text-primary sm:text-4xl">
                 {next.emoji} {next.name}
               </p>
             </div>
             <span
               aria-hidden
-              className="text-3xl text-bone-faint transition-transform group-hover:translate-x-2 group-hover:text-amber"
+              className="text-3xl text-text-faint transition-transform group-hover:translate-x-2 group-hover:text-primary"
             >
               →
             </span>

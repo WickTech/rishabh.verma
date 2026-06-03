@@ -10,7 +10,7 @@ export function StackChips({
       {stack.map((tech) => (
         <li
           key={tech}
-          className="rounded-md border border-line bg-ink px-2.5 py-1 font-mono text-xs text-bone-muted"
+          className="rounded-full border border-glass bg-primary/5 px-2.5 py-1 font-mono text-xs text-on-surface-variant"
         >
           {tech}
         </li>

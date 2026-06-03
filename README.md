@@ -1,10 +1,12 @@
 # 💼 Portfolio — Rishabh Verma
 
-A bold, motion-driven portfolio that showcases the products I've shipped — a live
-influencer marketplace, intelligence dashboards, RAG engines, and developer tooling.
+A cinematic, motion-driven portfolio ("Obsidian Kinetic") that showcases the
+products I've shipped — a live influencer marketplace, intelligence dashboards,
+RAG engines, and developer tooling.
 
-Built with **Next.js (App Router)**, **TypeScript**, **Tailwind CSS v4**, and
-**Framer Motion**. Per-project case-study pages, SSR/SEO, sitemap, and JSON-LD.
+Built with **Next.js (App Router)**, **TypeScript**, **Tailwind CSS v4**,
+**Framer Motion**, and a **scroll-driven Three.js / React Three Fiber** background.
+Per-project case-study pages, SSR/SEO, sitemap, and JSON-LD.
 
 ## Stack
 
@@ -14,8 +16,14 @@ Built with **Next.js (App Router)**, **TypeScript**, **Tailwind CSS v4**, and
 | Language | TypeScript |
 | Styling | Tailwind CSS v4 (`@theme` tokens in `app/globals.css`) |
 | Motion | Framer Motion (respects `prefers-reduced-motion`) |
-| Fonts | `next/font` — Space Grotesk (display), Inter (body), JetBrains Mono |
+| 3D | Three.js + React Three Fiber (lazy, scroll-driven, reduced-motion aware) |
+| Fonts | `next/font` — Geist (display + body), JetBrains Mono (labels) |
 | Deploy | Vercel |
+
+> **Design system:** the UI follows the Google Stitch "Obsidian Kinetic" spec
+> (`UI/stitch_kinetic_3d_narrative_portfolio/`). See
+> [`docs/ui-migration-plan.md`](docs/ui-migration-plan.md) and
+> [`docs/ui-upgrade-report.md`](docs/ui-upgrade-report.md).
 
 ## Develop
 

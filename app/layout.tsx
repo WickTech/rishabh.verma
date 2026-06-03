@@ -1,23 +1,21 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
+import { Geist, JetBrains_Mono } from "next/font/google";
 import { profile } from "@/data/profile";
+import { Scene } from "@/components/three/Scene";
 import "./globals.css";
 
-const display = Space_Grotesk({
+// Geist — display + body (DESIGN.md: "exceptional clarity, technical developer feel")
+const geist = Geist({
   subsets: ["latin"],
-  weight: ["500", "700"],
-  variable: "--font-display",
+  weight: ["400", "500", "600", "700", "900"],
+  variable: "--font-geist",
   display: "swap",
 });
 
-const sans = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-});
-
+// JetBrains Mono — labels, badges, technical metadata
 const mono = JetBrains_Mono({
   subsets: ["latin"],
+  weight: ["500"],
   variable: "--font-mono",
   display: "swap",
 });
@@ -62,8 +60,14 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable} ${mono.variable}`}>
-      <body className="grain">{children}</body>
+    <html lang="en" className={`${geist.variable} ${mono.variable}`}>
+      <body>
+        {/* Persistent scroll-driven 3D scene (fixed, behind content) */}
+        <Scene />
+        {/* Cinematic ambient lighting */}
+        <div className="ambient-glow" aria-hidden />
+        {children}
+      </body>
     </html>
   );
 }
