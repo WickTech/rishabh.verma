@@ -1,5 +1,10 @@
 # 💼 Portfolio — Rishabh Verma
 
+![Next.js](https://img.shields.io/badge/Next.js-15-000000?logo=nextdotjs&logoColor=white)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06B6D4?logo=tailwindcss&logoColor=white)
+
 A cinematic, motion-driven portfolio ("Obsidian Kinetic") that showcases the
 products I've shipped — a live influencer marketplace, intelligence dashboards,
 RAG engines, and developer tooling.
