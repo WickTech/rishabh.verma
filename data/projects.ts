@@ -47,9 +47,10 @@ export const projects: Project[] = [
       "Instagram OAuth + live analytics (followers, engagement, authenticity score)",
       "Creator onboarding wizard, Google OAuth, PWA, SEO + JSON-LD, GA4 + Clarity",
     ],
+    // GitHub intentionally omitted: Kalakaarian is a private, live commercial
+    // product. The live site is the proof; the source stays closed.
     links: {
       live: "https://kalakaarian.com",
-      github: "https://github.com/WickTech/Kalakaarian",
     },
     featured: true,
     accent: ["#ff8a3d", "#ff3d8a"],
