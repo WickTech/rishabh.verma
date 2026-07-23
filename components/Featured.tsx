@@ -126,8 +126,21 @@ export function Featured() {
                 </div>
                 <p className="role">{p.role}</p>
                 <div className="links">
+                  {p.links.live && (
+                    <a
+                      className="pri"
+                      href={p.links.live}
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      Visit live site →
+                    </a>
+                  )}
                   {p.caseStudy && (
-                    <a className="pri" href={`/projects/${p.slug}`}>
+                    <a
+                      className={p.links.live ? "" : "pri"}
+                      href={`/projects/${p.slug}`}
+                    >
                       Case study →
                     </a>
                   )}

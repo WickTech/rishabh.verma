@@ -87,7 +87,10 @@ export const projects: Project[] = [
       "Cross-stream signal correlation (surges, hotspots, convergence)",
       "AI briefs via Groq with rule-based fallback; ⌘K command palette",
     ],
-    links: { github: "https://github.com/WickTech/atlas" },
+    links: {
+      live: "https://world-monitor-app-an5u.vercel.app",
+      github: "https://github.com/WickTech/atlas",
+    },
     featured: true,
     accent: ["#2dd4bf", "#8b5cf6"],
     caseStudy: {
