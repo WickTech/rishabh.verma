@@ -88,7 +88,7 @@ export default async function ProjectPage({
                 {project.emoji}
               </span>
               <h1 className="display text-5xl sm:text-7xl">
-                <span className="text-flux">{project.name}</span>
+                <span className="flux">{project.name}</span>
               </h1>
             </div>
             <p className="mt-6 max-w-2xl text-xl leading-relaxed text-text-muted">
@@ -113,7 +113,7 @@ export default async function ProjectPage({
             <div className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-glass bg-glass sm:grid-cols-4">
               {cs.metrics.map((m) => (
                 <div key={m.label} className="bg-surface-lowest p-6">
-                  <div className="display text-4xl leading-none tracking-tight text-flux">
+                  <div className="display text-4xl leading-none tracking-tight flux">
                     {m.value}
                   </div>
                   <div className="mt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-text-faint">

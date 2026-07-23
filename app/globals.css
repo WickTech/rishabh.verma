@@ -31,6 +31,10 @@
   --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
 }
 
+/* Ported design stylesheet lives in @layer base so Tailwind utilities      */
+/* (used by the /projects/[slug] case-study page) win where they overlap —  */
+/* an unlayered reset would otherwise clobber every Tailwind margin/padding. */
+@layer base {
 :root {
   --bg: #050816;
   --surface: #0f1321;
@@ -1195,3 +1199,4 @@ footer.site .cp {
     display: none;
   }
 }
+} /* end @layer base */
