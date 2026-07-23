@@ -204,7 +204,7 @@ export const projects: Project[] = [
       "Local rate engine, booking, AWB/label generation",
       "Swappable courier-provider interface (mock → real)",
     ],
-    links: {},
+    links: { live: "https://logipilot-lac.vercel.app" },
     featured: false,
     accent: ["#f59e0b", "#ff5e3a"],
   },

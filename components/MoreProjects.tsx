@@ -29,7 +29,16 @@ export function MoreProjects() {
                   </span>
                 ))}
               </div>
-              {p.links.github ? (
+              {p.links.live ? (
+                <a
+                  className="gh"
+                  href={p.links.live}
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Visit live site ↗
+                </a>
+              ) : p.links.github ? (
                 <a
                   className="gh"
                   href={p.links.github}
