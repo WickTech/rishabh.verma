@@ -95,7 +95,7 @@ export const projects: Project[] = [
       "Lightweight, zero-framework-bloat CRA build",
     ],
     links: { github: "https://github.com/WickTech/weathernow" },
-    featured: true,
+    featured: false,
     accent: ["#38bdf8", "#8b5cf6"],
   },
   {
@@ -162,8 +162,8 @@ export const projects: Project[] = [
       "Built-in IR-metric evaluation suite (recall@k, etc.)",
       "Runs fully offline; add an API key for real embeddings",
     ],
-    links: {},
-    featured: false,
+    links: { github: "https://github.com/WickTech/lumen-rag" },
+    featured: true,
     accent: ["#fbbf24", "#ff8a3d"],
   },
   {
