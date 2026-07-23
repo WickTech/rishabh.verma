@@ -45,6 +45,7 @@ export default async function ProjectPage({
   if (!project) notFound();
 
   const [from, to] = project.accent;
+  const cs = project.caseStudy;
   const index = projects.findIndex((p) => p.slug === project.slug);
   const next = projects[(index + 1) % projects.length];
 
@@ -66,7 +67,7 @@ export default async function ProjectPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Nav />
-      <main className="content-layer px-5 pt-32 sm:px-8">
+      <main className="content px-5 pt-32 sm:px-8">
         <article className="mx-auto max-w-4xl">
           {/* Back */}
           <Link
@@ -106,6 +107,22 @@ export default async function ProjectPage({
               {project.emoji}
             </span>
           </div>
+
+          {/* Metrics strip (case study) */}
+          {cs && (
+            <div className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-glass bg-glass sm:grid-cols-4">
+              {cs.metrics.map((m) => (
+                <div key={m.label} className="bg-surface-lowest p-6">
+                  <div className="display text-4xl leading-none tracking-tight text-flux">
+                    {m.value}
+                  </div>
+                  <div className="mt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-text-faint">
+                    {m.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
 
           {/* Meta grid */}
           <div className="mt-12 grid gap-8 border-y border-glass py-8 sm:grid-cols-3">
@@ -165,6 +182,49 @@ export default async function ProjectPage({
             </p>
           </section>
 
+          {/* Problem */}
+          {cs && (
+            <section className="mt-12">
+              <h2 className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-primary">
+                The problem
+              </h2>
+              <p className="max-w-2xl text-lg leading-relaxed text-text-muted">
+                {cs.problem}
+              </p>
+            </section>
+          )}
+
+          {/* Architecture */}
+          {cs && (
+            <section className="mt-12">
+              <h2 className="mb-5 font-mono text-xs uppercase tracking-[0.3em] text-primary">
+                How it works
+              </h2>
+              <div className="flex flex-col gap-px overflow-hidden rounded-xl border border-glass bg-glass">
+                {cs.architecture.map((a, i) => (
+                  <div key={a.title} className="bg-surface-lowest p-6 sm:p-7">
+                    <div className="flex items-baseline gap-4">
+                      <span
+                        aria-hidden
+                        className="font-mono text-sm text-text-faint"
+                      >
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <div>
+                        <h3 className="display text-xl text-on-surface">
+                          {a.title}
+                        </h3>
+                        <p className="mt-2 max-w-2xl leading-relaxed text-text-muted">
+                          {a.detail}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
           {/* Highlights */}
           <section className="mt-12">
             <h2 className="mb-5 font-mono text-xs uppercase tracking-[0.3em] text-primary">
@@ -191,6 +251,33 @@ export default async function ProjectPage({
             </h2>
             <StackChips stack={project.stack} />
           </section>
+
+          {/* Outcome */}
+          {cs && (
+            <section className="mt-12">
+              <h2 className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-primary">
+                Outcome
+              </h2>
+              <div
+                className="glass rounded-xl p-7 sm:p-8"
+                style={{ borderTopColor: "var(--glass-top)" }}
+              >
+                <p className="max-w-2xl text-lg leading-relaxed text-on-surface">
+                  {cs.outcome}
+                </p>
+                {project.links.live && (
+                  <a
+                    href={project.links.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-5 inline-flex items-center gap-2 font-semibold text-primary transition-colors hover:text-soft-purple"
+                  >
+                    See it live ↗
+                  </a>
+                )}
+              </div>
+            </section>
+          )}
 
           {/* Next project */}
           <Link

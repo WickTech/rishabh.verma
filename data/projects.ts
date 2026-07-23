@@ -5,6 +5,18 @@ export interface ProjectLinks {
   github?: string;
 }
 
+/** Optional deep-dive shown on the /projects/[slug] case-study page. */
+export interface CaseStudy {
+  /** the problem the project set out to solve */
+  problem: string;
+  /** architecture / how-it-works, as titled points */
+  architecture: { title: string; detail: string }[];
+  /** headline numbers — keep these honest/structural, not invented traction */
+  metrics: { value: string; label: string }[];
+  /** what shipped and why it holds up */
+  outcome: string;
+}
+
 export interface Project {
   slug: string;
   name: string;
@@ -23,6 +35,8 @@ export interface Project {
   featured: boolean;
   /** two hex stops used for the card's gradient accent */
   accent: [string, string];
+  /** optional long-form case study rendered on the project page */
+  caseStudy?: CaseStudy;
 }
 
 export const projects: Project[] = [
@@ -76,6 +90,50 @@ export const projects: Project[] = [
     links: { github: "https://github.com/WickTech/atlas" },
     featured: true,
     accent: ["#2dd4bf", "#8b5cf6"],
+    caseStudy: {
+      problem:
+        "Global-event intelligence is scattered across news, equities, and crypto — each behind its own flaky, rate-limited API, and almost none of it framed for an India-first reader. Naive dashboards that fan out to those APIs on every load go blank the moment one upstream throttles or fails. Atlas set out to fuse those streams into a single, India-centered pane that stays up even when its sources don't.",
+      architecture: [
+        {
+          title: "Multi-source ingestion, normalized",
+          detail:
+            "GDELT (world news), Alpha Vantage (equities), CoinGecko (crypto), and Yahoo Finance are pulled on independent schedules and normalized into one event stream, so downstream scoring never cares which source a signal came from.",
+        },
+        {
+          title: "Per-country risk → Country Intelligence Index",
+          detail:
+            "Each article is scored for sentiment and mapped to a country; those roll up into a per-country risk index rendered as an India-centered choropleth — the reader's home region is the anchor, not an afterthought.",
+        },
+        {
+          title: "Cross-stream signal correlation",
+          detail:
+            "A correlation pass looks across news, markets, and crypto together to surface surges, hotspots, and convergence — the moments where multiple independent streams move at once.",
+        },
+        {
+          title: "AI briefs with a rule-based fallback",
+          detail:
+            "Briefings are generated via Groq, but degrade to a deterministic rule-based summary when the model is unavailable — the feed always has a brief, never an error card.",
+        },
+        {
+          title: "Resilience layer that never blanks the feed",
+          detail:
+            "A caching layer serves the last good snapshot when an upstream is rate-limited or down, so a third-party outage degrades freshness, not availability.",
+        },
+        {
+          title: "⌘K command palette",
+          detail:
+            "Keyboard-first navigation across countries, streams, and views for fast operator-style use.",
+        },
+      ],
+      metrics: [
+        { value: "4", label: "Live data sources fused" },
+        { value: "3", label: "Streams: news · equities · crypto" },
+        { value: "0", label: "Blank states on upstream failure" },
+        { value: "⌘K", label: "Keyboard-first navigation" },
+      ],
+      outcome:
+        "Atlas runs live as a single India-first intelligence dashboard that holds together under real-world API flakiness — the resilient cache and rule-based fallbacks mean an upstream outage costs freshness, not the whole page. It's the clearest demonstration in this portfolio of wiring messy real-world data sources, AI, and a resilience story into one coherent product.",
+    },
   },
   {
     slug: "skyline",
