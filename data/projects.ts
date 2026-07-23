@@ -88,7 +88,7 @@ export const projects: Project[] = [
       "AI briefs via Groq with rule-based fallback; ⌘K command palette",
     ],
     links: {
-      live: "https://world-monitor-app-an5u.vercel.app",
+      live: "https://atlas-eight-fawn.vercel.app",
       github: "https://github.com/WickTech/atlas",
     },
     featured: true,
