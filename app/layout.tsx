@@ -1,22 +1,31 @@
 import type { Metadata } from "next";
-import { Geist, JetBrains_Mono } from "next/font/google";
+import { Archivo, JetBrains_Mono, Source_Serif_4 } from "next/font/google";
 import { profile } from "@/data/profile";
-import { Scene } from "@/components/three/Scene";
+import { NetworkCanvas } from "@/components/NetworkCanvas";
 import "./globals.css";
 
-// Geist — display + body (DESIGN.md: "exceptional clarity, technical developer feel")
-const geist = Geist({
+// Archivo — display + body (the design's primary typeface)
+const archivo = Archivo({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "900"],
-  variable: "--font-geist",
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-archivo",
+  display: "swap",
+});
+
+// Source Serif 4 — editorial serif accents
+const sourceSerif = Source_Serif_4({
+  subsets: ["latin"],
+  weight: ["400", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-source-serif",
   display: "swap",
 });
 
 // JetBrains Mono — labels, badges, technical metadata
 const mono = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["500"],
-  variable: "--font-mono",
+  weight: ["400", "500", "600"],
+  variable: "--font-jetbrains-mono",
   display: "swap",
 });
 
@@ -56,16 +65,26 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
+// Set the persisted theme on <html> before first paint (no flash of dark).
+const THEME_SCRIPT = `(function(){try{var t=localStorage.getItem('rv-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`;
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${geist.variable} ${mono.variable}`}>
+    <html
+      lang="en"
+      data-theme="dark"
+      className={`${archivo.variable} ${sourceSerif.variable} ${mono.variable}`}
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
       <body>
-        {/* Persistent scroll-driven 3D scene (fixed, behind content) */}
-        <Scene />
-        {/* Cinematic ambient lighting */}
-        <div className="ambient-glow" aria-hidden />
+        {/* Fixed background layers (z-0/1), behind the content layer (z-10) */}
+        <NetworkCanvas />
+        <div className="grid-tex" aria-hidden />
+        <div className="ambient" aria-hidden />
         {children}
       </body>
     </html>

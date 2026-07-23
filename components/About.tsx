@@ -1,59 +1,49 @@
 import { profile } from "@/data/profile";
-import { SectionHeading } from "./SectionHeading";
-import { Reveal } from "./motion/Reveal";
 
 export function About() {
   return (
-    <section id="about" className="content-layer scroll-mt-24 px-5 py-24 sm:px-8 sm:py-32">
-      <div className="mx-auto max-w-6xl">
-        <SectionHeading index="04" kicker="Philosophy" title="Who's behind it" />
-
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr]">
-          {/* Narrative inside a glass panel with a subtle inner glow */}
-          <Reveal className="relative overflow-hidden rounded-2xl">
-            <div className="glass relative flex flex-col gap-6 rounded-2xl p-8 md:p-10">
-              <div
-                aria-hidden
-                className="pointer-events-none absolute -right-1/4 -top-1/4 h-64 w-64 rounded-full bg-primary/10 blur-3xl"
-              />
-              <p className="relative text-xl leading-relaxed text-on-surface">
-                {profile.summary}
-              </p>
-              {profile.about.map((para) => (
-                <p
-                  key={para.slice(0, 24)}
-                  className="relative leading-relaxed text-text-muted"
-                >
-                  {para}
-                </p>
-              ))}
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.1} className="flex flex-col gap-8">
+    <section id="about" className="sec">
+      <div className="wrap">
+        <div className="sec-head reveal">
+          <div className="k">
+            <span className="kicker">Philosophy</span>
+            <h2 className="display">Who&apos;s behind it</h2>
+          </div>
+          <span className="idx display stroke">04</span>
+        </div>
+        <div className="about-grid">
+          <div className="about-panel glass reveal">
+            <div className="glow" />
+            <p className="lead">{profile.summary}</p>
+            {profile.about.map((para) => (
+              <p key={para.slice(0, 24)}>{para}</p>
+            ))}
+          </div>
+          <div className="about-side reveal">
             <div>
-              <h3 className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-primary">
-                Toolbox
-              </h3>
-              <ul className="flex flex-wrap gap-2">
+              <h3>Toolbox</h3>
+              <ul className="tools">
                 {profile.toolbox.map((t) => (
-                  <li
-                    key={t}
-                    className="rounded-full border border-glass bg-primary/5 px-3 py-1.5 text-sm text-text-muted"
-                  >
-                    {t}
-                  </li>
+                  <li key={t}>{t}</li>
                 ))}
               </ul>
             </div>
-
             <div>
-              <h3 className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-primary">
-                Based in
-              </h3>
-              <p className="text-on-surface">{profile.location}</p>
+              <h3>Based in</h3>
+              <p style={{ color: "var(--on-surface)" }}>{profile.location}</p>
             </div>
-          </Reveal>
+            <div>
+              <h3>Off the clock</h3>
+              <p style={{ color: "var(--muted)", lineHeight: 1.7 }}>
+                Musician at heart — I go by{" "}
+                <span style={{ color: "var(--on-surface)" }}>
+                  @rishi_musicoholic
+                </span>
+                . The same instinct for rhythm and iteration shows up in how I
+                ship.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

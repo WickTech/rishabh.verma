@@ -6,12 +6,13 @@ import { MoreProjects } from "@/components/MoreProjects";
 import { About } from "@/components/About";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
+import { RevealInit } from "@/components/RevealInit";
 
-/** Thin gradient rule that separates major sections (DESIGN.md "Glow Beam"). */
-function GlowBeam() {
+/** Thin gradient rule that separates major sections (design "beam"). */
+function Beam() {
   return (
-    <div className="content-layer mx-auto max-w-6xl px-5 sm:px-8">
-      <hr className="glow-beam" />
+    <div className="wrap content">
+      <hr className="beam" />
     </div>
   );
 }
@@ -19,18 +20,19 @@ function GlowBeam() {
 export default function Home() {
   return (
     <>
+      <RevealInit />
       <Nav />
-      <main>
+      <main className="content">
         <Hero />
-        <GlowBeam />
+        <Beam />
         <Expertise />
-        <GlowBeam />
+        <Beam />
         <Featured />
-        <GlowBeam />
+        <Beam />
         <MoreProjects />
-        <GlowBeam />
+        <Beam />
         <About />
-        <GlowBeam />
+        <Beam />
         <Contact />
       </main>
       <Footer />

@@ -1,86 +1,94 @@
-import { SectionHeading } from "./SectionHeading";
-import { Reveal } from "./motion/Reveal";
+import type { ReactNode } from "react";
 
-/**
- * Core competencies — three glassmorphism cards (Stitch "Expertise" section).
- * Content reflects the real shape of the work in data/projects.ts:
- * shipping full-stack products, AI/LLM systems, and product strategy.
- */
-const COMPETENCIES = [
+interface Competency {
+  title: string;
+  blurb: string;
+  accent: string;
+  glyph: ReactNode;
+  items: string[];
+  raised?: boolean;
+}
+
+const COMPETENCIES: Competency[] = [
   {
     title: "Engineering",
-    icon: "terminal",
+    accent: "var(--secondary)",
+    glyph: (
+      <svg viewBox="0 0 24 24">
+        <path d="M4 17l6-6-6-6" />
+        <path d="M12 19h8" />
+      </svg>
+    ),
     blurb:
       "End-to-end product engineering — scalable architecture, typed APIs, and performant front-ends on modern stacks.",
-    accent: "var(--color-secondary)",
     items: ["React / Next.js", "Node.js / FastAPI", "Supabase / Postgres"],
   },
   {
     title: "AI & Systems",
-    icon: "neurology",
+    accent: "var(--soft-purple)",
+    raised: true,
+    glyph: (
+      <svg viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="3" />
+        <path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2" />
+      </svg>
+    ),
     blurb:
       "LLM products wired the way real software needs — streaming, RAG with evaluation harnesses, billing ledgers, and orchestration.",
-    accent: "var(--color-soft-purple)",
     items: ["LLMs & RAG", "Vercel AI SDK", "Evaluation & retrieval"],
-    raised: true,
   },
   {
     title: "Product Strategy",
-    icon: "strategy",
+    accent: "var(--primary)",
+    glyph: (
+      <svg viewBox="0 0 24 24">
+        <path d="M3 3v18h18" />
+        <path d="M7 14l4-4 3 3 5-6" />
+      </svg>
+    ),
     blurb:
       "Scoping tightly and shipping the smallest genuinely-useful thing first — aligning technical capability with real outcomes.",
-    accent: "var(--color-primary)",
     items: ["Roadmap & scope", "Two-sided marketplaces", "Payments & escrow"],
   },
 ];
 
 export function Expertise() {
   return (
-    <section
-      id="expertise"
-      className="content-layer scroll-mt-24 px-5 py-24 sm:px-8 sm:py-32"
-    >
-      <div className="mx-auto max-w-6xl">
-        <SectionHeading
-          index="01"
-          kicker="Core competencies"
-          title="Mapped for impact"
-        />
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {COMPETENCIES.map((c, i) => (
-            <Reveal
+    <section id="expertise" className="sec">
+      <div className="wrap">
+        <div className="sec-head reveal">
+          <div className="k">
+            <span className="kicker">Core competencies</span>
+            <h2 className="display">Mapped for impact</h2>
+          </div>
+          <span className="idx display stroke">01</span>
+        </div>
+        <div className="exp-grid">
+          {COMPETENCIES.map((c) => (
+            <div
               key={c.title}
-              delay={i * 0.08}
-              className={c.raised ? "md:-translate-y-8" : ""}
+              className={`exp glass reveal${c.raised ? " raised" : ""}`}
             >
-              <div className="glass group h-full rounded-xl p-8 transition-colors duration-300 hover:bg-slate/80">
-                <span
-                  aria-hidden
-                  className="mb-6 inline-block h-10 w-10 rounded-md"
-                  style={{
-                    background: `linear-gradient(135deg, ${c.accent}, transparent)`,
-                    boxShadow: `0 0 24px -6px ${c.accent}`,
-                  }}
-                />
-                <h3 className="display mb-4 text-2xl text-on-surface">{c.title}</h3>
-                <p className="mb-6 leading-relaxed text-text-muted">{c.blurb}</p>
-                <ul className="flex flex-col gap-3 font-mono text-xs text-on-surface-variant">
-                  {c.items.map((it) => (
-                    <li
-                      key={it}
-                      className="flex items-center gap-2 border-b border-glass pb-2"
-                    >
-                      <span
-                        aria-hidden
-                        className="h-1 w-1 rounded-full"
-                        style={{ background: c.accent }}
-                      />
-                      {it}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
+              <span
+                className="glyph"
+                style={{
+                  background: `linear-gradient(135deg,${c.accent},transparent)`,
+                  boxShadow: `0 0 24px -6px ${c.accent}`,
+                }}
+              >
+                {c.glyph}
+              </span>
+              <h3 className="display">{c.title}</h3>
+              <p>{c.blurb}</p>
+              <ul>
+                {c.items.map((it) => (
+                  <li key={it}>
+                    <i style={{ background: c.accent }} />
+                    {it}
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
         </div>
       </div>
