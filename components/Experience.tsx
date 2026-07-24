@@ -9,7 +9,7 @@ export function Experience() {
             <span className="kicker">Track record</span>
             <h2 className="display">Experience</h2>
           </div>
-          <span className="idx display stroke">05</span>
+          <span className="idx display stroke">03</span>
         </div>
 
         <div className="timeline">

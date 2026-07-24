@@ -28,13 +28,13 @@ export default function Home() {
         <Beam />
         <Expertise />
         <Beam />
-        <Featured />
-        <Beam />
-        <MoreProjects />
-        <Beam />
         <About />
         <Beam />
         <Experience />
+        <Beam />
+        <Featured />
+        <Beam />
+        <MoreProjects />
         <Beam />
         <Contact />
       </main>

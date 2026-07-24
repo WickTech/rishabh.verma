@@ -14,7 +14,7 @@ export function Featured() {
             <span className="kicker">Selected work</span>
             <h2 className="display">Products I&apos;ve shipped</h2>
           </div>
-          <span className="idx display stroke">02</span>
+          <span className="idx display stroke">04</span>
         </div>
 
         {/* Flagship */}

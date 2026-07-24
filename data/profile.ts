@@ -62,7 +62,7 @@ export const profile = {
       period: "2025 — Present",
       location: "Durg, India",
       summary:
-        "Building India's AI-powered creator–brand marketplace end to end — live on real payments, escrow, and a seven-stage campaign workflow with PDF invoices and Instagram analytics.",
+        "Building India's AI-powered creator–brand marketplace end to end. Live on real payments, escrow, and a full seven-stage campaign workflow.",
     },
     {
       role: "Software Engineer",
@@ -70,7 +70,7 @@ export const profile = {
       period: "May 2024 — Mar 2026",
       location: "Remote · Lake Jackson, TX",
       summary:
-        "Automation & process-orchestration software for credit unions and banks. Designed, tested, and documented 20+ contract-first REST endpoints with zero post-deploy regressions; built idempotent financial-data pipelines that cut manual operational work by ~50%.",
+        "Automation software for credit unions and banks. Built and documented 20+ REST APIs with zero post-deploy regressions, plus financial-data pipelines that cut manual work ~50%.",
     },
     {
       role: "Web Developer",
@@ -78,7 +78,7 @@ export const profile = {
       period: "Sep 2023 — Apr 2024",
       location: "Bangalore, India",
       summary:
-        "Shipped production React features and a reusable component library in a high-traffic consumer e-commerce SPA; built REST APIs that reduced data-fetch latency through optimized endpoint design.",
+        "Shipped production React features and a reusable component library for a high-traffic e-commerce app. Built REST APIs for faster, cleaner data fetching.",
     },
   ] satisfies ExperienceEntry[],
 

@@ -9,7 +9,7 @@ export function MoreProjects() {
             <span className="kicker">Also building</span>
             <h2 className="display">More projects</h2>
           </div>
-          <span className="idx display stroke">03</span>
+          <span className="idx display stroke">05</span>
         </div>
         <div className="more-grid">
           {moreProjects.map((p) => (

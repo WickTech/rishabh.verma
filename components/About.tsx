@@ -9,7 +9,7 @@ export function About() {
             <span className="kicker">Philosophy</span>
             <h2 className="display">Who&apos;s behind it</h2>
           </div>
-          <span className="idx display stroke">04</span>
+          <span className="idx display stroke">02</span>
         </div>
         <div className="about-grid">
           <div className="about-panel glass reveal">
