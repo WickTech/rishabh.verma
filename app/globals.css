@@ -448,6 +448,77 @@ h1.hero {
   }
 }
 
+/* hero 2-col (text left, portrait right) */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 44px;
+  align-items: center;
+  width: 100%;
+}
+@media (min-width: 980px) {
+  .hero-grid {
+    grid-template-columns: 1.12fr 0.88fr;
+    gap: 56px;
+  }
+}
+.hero-portrait {
+  position: relative;
+  justify-self: center;
+  width: 100%;
+  max-width: 340px;
+  order: -1;
+}
+@media (min-width: 980px) {
+  .hero-portrait {
+    justify-self: end;
+    max-width: 400px;
+    order: 0;
+  }
+}
+.hero-left {
+  min-width: 0;
+}
+@media (min-width: 980px) {
+  /* in the 2-col hero the left column is narrower — keep stats readable */
+  .hero-left .stats {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 520px;
+  }
+}
+.hero-portrait .pglow {
+  position: absolute;
+  inset: -14%;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(circle at 52% 38%, rgba(209, 107, 255, 0.3), transparent 66%),
+    radial-gradient(circle at 30% 80%, rgba(0, 112, 243, 0.22), transparent 62%);
+  filter: blur(26px);
+}
+.hero-portrait .frame {
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid var(--glass);
+  border-top-color: var(--glass-top);
+  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.7);
+}
+.hero-portrait .frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+/* melt the outdoor background into the theme: top+bottom fade + brand wash */
+.hero-portrait .frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, color-mix(in oklab, var(--bg) 55%, transparent) 0%, transparent 26%, transparent 66%, color-mix(in oklab, var(--bg) 82%, transparent) 100%),
+    radial-gradient(120% 90% at 50% 0%, transparent 60%, rgba(209, 107, 255, 0.12));
+  mix-blend-mode: normal;
+}
+
 /* stats */
 .stats {
   margin-top: 56px;

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { profile } from "@/data/profile";
 import { projects } from "@/data/projects";
 
@@ -35,47 +36,65 @@ export function Hero() {
         }}
       />
       <div className="wrap" style={{ width: "100%" }}>
-        <div className="chip reveal">
-          <span className="dot">
-            <span />
-            <span />
-          </span>
-          <span className="lbl">{profile.role}</span>
-        </div>
-        <h1 className="hero display">
-          {profile.headline.map((ln, i) => (
-            <span className="line reveal" key={ln}>
-              {i === profile.headline.length - 1 ? (
-                <span className="flux">{ln}</span>
-              ) : (
-                ln
-              )}
-            </span>
-          ))}
-        </h1>
-        <p className="hero-sub reveal">{profile.tagline}</p>
-        <div className="hero-cta reveal">
-          <a href="#work" className="btn-grad">
-            See the work <span className="arrow">→</span>
-          </a>
-          <a
-            href={profile.resume}
-            target="_blank"
-            rel="noopener"
-            className="btn-ghost"
-          >
-            Résumé
-          </a>
-        </div>
-        <div className="stats reveal">
-          {STATS.map((s) => (
-            <div className="stat" key={s.l}>
-              <div className="n">
-                <span className="flux">{s.n}</span>
-              </div>
-              <div className="l">{s.l}</div>
+        <div className="hero-grid">
+          <div className="hero-left">
+            <div className="chip reveal">
+              <span className="dot">
+                <span />
+                <span />
+              </span>
+              <span className="lbl">{profile.role}</span>
             </div>
-          ))}
+            <h1 className="hero display">
+              {profile.headline.map((ln, i) => (
+                <span className="line reveal" key={ln}>
+                  {i === profile.headline.length - 1 ? (
+                    <span className="flux">{ln}</span>
+                  ) : (
+                    ln
+                  )}
+                </span>
+              ))}
+            </h1>
+            <p className="hero-sub reveal">{profile.tagline}</p>
+            <div className="hero-cta reveal">
+              <a href="#work" className="btn-grad">
+                See the work <span className="arrow">→</span>
+              </a>
+              <a
+                href={profile.resume}
+                target="_blank"
+                rel="noopener"
+                className="btn-ghost"
+              >
+                Résumé
+              </a>
+            </div>
+            <div className="stats reveal">
+              {STATS.map((s) => (
+                <div className="stat" key={s.l}>
+                  <div className="n">
+                    <span className="flux">{s.n}</span>
+                  </div>
+                  <div className="l">{s.l}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="hero-portrait reveal">
+            <div className="pglow" aria-hidden />
+            <div className="frame">
+              <Image
+                src="/portrait.jpeg"
+                alt={`${profile.name} — ${profile.role}`}
+                width={1023}
+                height={1537}
+                priority
+                sizes="(min-width: 980px) 400px, 340px"
+              />
+            </div>
+          </div>
         </div>
       </div>
       <div className="ticker">
