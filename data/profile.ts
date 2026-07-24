@@ -67,13 +67,13 @@ export const profile = {
     {
       role: "Software Engineer",
       org: "Futuredge",
-      period: "May 2024 — Present",
+      period: "May 2024 — Mar 2026",
       location: "Remote · Lake Jackson, TX",
       summary:
         "Automation & process-orchestration software for credit unions and banks. Designed, tested, and documented 20+ contract-first REST endpoints with zero post-deploy regressions; built idempotent financial-data pipelines that cut manual operational work by ~50%.",
     },
     {
-      role: "Web Developer Intern",
+      role: "Web Developer",
       org: "BuyHatke",
       period: "Sep 2023 — Apr 2024",
       location: "Bangalore, India",

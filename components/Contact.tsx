@@ -30,15 +30,6 @@ export function Contact() {
             >
               {profile.email}
             </a>
-            <a
-              href={profile.resume}
-              target="_blank"
-              rel="noopener"
-              className="btn-ghost"
-              style={{ padding: "12px 22px" }}
-            >
-              Download résumé
-            </a>
           </div>
           <div className="socials">
             {profile.socials.map((s) => (

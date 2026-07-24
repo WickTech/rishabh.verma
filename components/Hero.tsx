@@ -61,14 +61,6 @@ export function Hero() {
               <a href="#work" className="btn-grad">
                 See the work <span className="arrow">→</span>
               </a>
-              <a
-                href={profile.resume}
-                target="_blank"
-                rel="noopener"
-                className="btn-ghost"
-              >
-                Résumé
-              </a>
             </div>
             <div className="stats reveal">
               {STATS.map((s) => (
