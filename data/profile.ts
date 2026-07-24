@@ -19,10 +19,10 @@ export const profile = {
     "I work like a product manager who can also write the code: scope tightly, ship the smallest thing that's genuinely useful, then iterate. AI is my force multiplier, not my crutch.",
   ],
   location: "Durg, Chhattisgarh, India",
-  email: "rishabhverma707@gmail.com",
+  email: "rishabhverma.dev@gmail.com",
   phone: "7000797371",
   resume: "/resume.pdf",
-  url: "https://portfolio-wicktech.vercel.app",
+  url: "https://rishabh-verma.vercel.app",
 
   // What I work with — shown in the About section
   toolbox: [
