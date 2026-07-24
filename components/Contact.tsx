@@ -1,4 +1,5 @@
 import { profile } from "@/data/profile";
+import { ContactForm } from "./ContactForm";
 
 export function Contact() {
   return (
@@ -18,17 +19,14 @@ export function Contact() {
             Have a product in mind, a role to fill, or just want to talk shop? My
             inbox is open.
           </p>
-          <div className="cta">
+
+          <ContactForm />
+
+          <div className="cta" style={{ marginTop: 28 }}>
             <a
               href={`mailto:${profile.email}`}
-              className="btn-grad"
-              style={{
-                padding: "14px 28px",
-                fontFamily: "var(--font-sans)",
-                textTransform: "none",
-                letterSpacing: 0,
-                fontSize: 14,
-              }}
+              className="btn-ghost"
+              style={{ padding: "12px 22px" }}
             >
               {profile.email}
             </a>
@@ -37,7 +35,7 @@ export function Contact() {
               target="_blank"
               rel="noopener"
               className="btn-ghost"
-              style={{ padding: "14px 28px" }}
+              style={{ padding: "12px 22px" }}
             >
               Download résumé
             </a>

@@ -1174,6 +1174,106 @@ footer.site .cp {
   color: var(--faint);
 }
 
+/* contact form */
+.cform {
+  margin: 40px auto 0;
+  max-width: 40rem;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  text-align: left;
+}
+.cform-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+@media (min-width: 640px) {
+  .cform-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.field span {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--faint);
+}
+.field input,
+.field textarea {
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--on-surface);
+  background: color-mix(in oklab, var(--slate) 45%, transparent);
+  border: 1px solid var(--glass);
+  border-top-color: var(--glass-top);
+  border-radius: 8px;
+  padding: 12px 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  resize: vertical;
+}
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--faint);
+}
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--primary) 22%, transparent);
+}
+.cform .btn-grad {
+  align-self: flex-start;
+  padding: 13px 26px;
+  font-family: var(--font-sans);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 14px;
+  border: 0;
+  cursor: pointer;
+}
+.cform .btn-grad:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.form-err {
+  font-size: 14px;
+  color: var(--tertiary);
+}
+.form-err a {
+  color: var(--tertiary);
+  text-decoration: underline;
+}
+.form-ok {
+  margin: 40px auto 0;
+  max-width: 40rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 40px;
+  border-radius: 16px;
+}
+.form-ok .display {
+  font-size: 1.6rem;
+  color: var(--on-surface);
+}
+.form-ok p:not(.display) {
+  color: var(--muted);
+}
+.form-ok .btn-ghost {
+  margin-top: 8px;
+  cursor: pointer;
+  background: none;
+}
+
 /* reveal */
 .reveal {
   opacity: 0;
