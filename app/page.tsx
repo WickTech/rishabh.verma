@@ -4,6 +4,7 @@ import { Expertise } from "@/components/Expertise";
 import { Featured } from "@/components/Featured";
 import { MoreProjects } from "@/components/MoreProjects";
 import { About } from "@/components/About";
+import { Experience } from "@/components/Experience";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { RevealInit } from "@/components/RevealInit";
@@ -32,6 +33,8 @@ export default function Home() {
         <MoreProjects />
         <Beam />
         <About />
+        <Beam />
+        <Experience />
         <Beam />
         <Contact />
       </main>

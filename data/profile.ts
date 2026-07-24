@@ -4,6 +4,20 @@ export interface SocialLink {
   handle: string;
 }
 
+export interface ExperienceEntry {
+  role: string;
+  org: string;
+  period: string;
+  location: string;
+  summary: string;
+}
+
+export interface EducationEntry {
+  credential: string;
+  org: string;
+  period: string;
+}
+
 export const profile = {
   name: "Rishabh Verma",
   role: "Product Builder & AI Engineer",
@@ -39,6 +53,52 @@ export const profile = {
     "LLMs & RAG",
     "Razorpay",
   ],
+
+  // Work history — shown as the Experience timeline (newest first)
+  experience: [
+    {
+      role: "Founder",
+      org: "Kalakaarian",
+      period: "2025 — Present",
+      location: "Durg, India",
+      summary:
+        "Building India's AI-powered creator–brand marketplace end to end — live on real payments, escrow, and a seven-stage campaign workflow with PDF invoices and Instagram analytics.",
+    },
+    {
+      role: "Software Engineer",
+      org: "Futuredge",
+      period: "May 2024 — Present",
+      location: "Remote · Lake Jackson, TX",
+      summary:
+        "Automation & process-orchestration software for credit unions and banks. Designed, tested, and documented 20+ contract-first REST endpoints with zero post-deploy regressions; built idempotent financial-data pipelines that cut manual operational work by ~50%.",
+    },
+    {
+      role: "Web Developer Intern",
+      org: "BuyHatke",
+      period: "Sep 2023 — Apr 2024",
+      location: "Bangalore, India",
+      summary:
+        "Shipped production React features and a reusable component library in a high-traffic consumer e-commerce SPA; built REST APIs that reduced data-fetch latency through optimized endpoint design.",
+    },
+  ] satisfies ExperienceEntry[],
+
+  education: [
+    {
+      credential: "M.S. Computer Science (in progress)",
+      org: "Woolf University",
+      period: "Aug 2025 — Feb 2027",
+    },
+    {
+      credential: "Data Science & Full-Stack Program",
+      org: "Scaler Academy",
+      period: "2021 — 2023",
+    },
+    {
+      credential: "B.Tech, Electrical & Electronics Engineering",
+      org: "CSVTU",
+      period: "2014 — 2019",
+    },
+  ] satisfies EducationEntry[],
 
   socials: [
     { label: "GitHub", href: "https://github.com/WickTech", handle: "WickTech" },
