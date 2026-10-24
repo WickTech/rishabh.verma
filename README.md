@@ -1,17 +1,16 @@
-# 💼 Portfolio — Rishabh Verma
+# Portfolio — Rishabh Verma
 
 ![Next.js](https://img.shields.io/badge/Next.js-15-000000?logo=nextdotjs&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?logo=typescript&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06B6D4?logo=tailwindcss&logoColor=white)
 
-A cinematic, motion-driven portfolio ("Obsidian Kinetic") that showcases the
-products I've shipped — a live influencer marketplace, intelligence dashboards,
-RAG engines, and developer tooling.
+Live: **https://rishabh-verma.vercel.app**
 
-Built with **Next.js (App Router)**, **TypeScript**, **Tailwind CSS v4**,
-**Framer Motion**, and a **scroll-driven Three.js / React Three Fiber** background.
-Per-project case-study pages, SSR/SEO, sitemap, and JSON-LD.
+Personal portfolio of a product builder and AI engineer. Showcases shipped
+products (a live influencer marketplace, an intelligence dashboard, RAG and
+payments engines, developer tooling), a fixed-price services section, and
+per-project case studies. Dark and light themes.
 
 ## Stack
 
@@ -19,58 +18,63 @@ Per-project case-study pages, SSR/SEO, sitemap, and JSON-LD.
 |---|---|
 | Framework | Next.js 15 (App Router) + React 19 |
 | Language | TypeScript |
-| Styling | Tailwind CSS v4 (`@theme` tokens in `app/globals.css`) |
-| Motion | Framer Motion (respects `prefers-reduced-motion`) |
-| 3D | Three.js + React Three Fiber (lazy, scroll-driven, reduced-motion aware) |
-| Fonts | `next/font` — Geist (display + body), JetBrains Mono (labels) |
-| Deploy | Vercel |
-
-> **Design system:** the UI follows the Google Stitch "Obsidian Kinetic" spec
-> (`UI/stitch_kinetic_3d_narrative_portfolio/`). See
-> [`docs/ui-migration-plan.md`](docs/ui-migration-plan.md) and
-> [`docs/ui-upgrade-report.md`](docs/ui-upgrade-report.md).
+| Styling | Tailwind CSS v4 (`@theme` bridge) + a design stylesheet in `@layer base` (`app/globals.css`) |
+| Background | 2D-canvas node network (`components/NetworkCanvas.tsx`), low intensity, off under `prefers-reduced-motion` |
+| Scroll reveals | `IntersectionObserver` (`components/RevealInit.tsx`), no animation library |
+| Contact form | Web3Forms (client-side; public key, override with `NEXT_PUBLIC_WEB3FORMS_KEY`) |
+| SEO | Per-project metadata, sitemap, robots, JSON-LD |
+| Deploy | Vercel, auto-deploys on push to `main` |
 
 ## Develop
 
 ```bash
 npm install
 npm run dev      # http://localhost:3000
-npm run build    # production build (prerenders all routes)
+npm run build    # production build (also the CI/verification step)
+npm run start    # serve the production build
 ```
+
+## Page flow
+
+Hero → Expertise (01) → About (02) → Experience (03) → Work (04) → More (05)
+→ Services (06) → Contact. Section numbers and the nav order
+(`components/Nav.tsx`) must stay in sync if you reorder.
 
 ## Where the content lives
 
-Everything is data-driven — no need to touch components to update content:
+Content is data-driven; edit data, not components.
 
-- **`data/projects.ts`** — the single source of truth for every project (cards,
-  routes, SEO). Each entry: `slug, name, emoji, tagline, description, role, year,
-  stack[], status ('live' | 'oss' | 'wip'), highlights[], links{live?, github?},
-  featured, accent`.
-- **`data/profile.ts`** — name, role, hero copy, about text, toolbox, socials, résumé path.
+- **`data/projects.ts`**: every project (cards, routes, SEO). Fields: `slug, name,
+  emoji, tagline, description, role, year, stack[], status ('live' | 'oss' | 'wip'),
+  highlights[], links{live?, github?}, featured, accent, caseStudy?`.
+- **`data/profile.ts`**: name, role, hero copy, about text, toolbox, experience,
+  education, socials, résumé path.
+- **`components/Services.tsx`**: service cards and starting prices (INR).
 
-### Adding / updating a project
-Add an object to the `projects` array in `data/projects.ts`. Set `featured: true`
-for a large card on the home page, or `false` for the "More projects" grid. A
-case-study page is generated automatically at `/projects/<slug>`.
+### Adding a project
 
-## To-do before going live
+Add an object to `projects` in `data/projects.ts`. `featured: true` gives a large
+card in Work; `false` puts it in the More grid. Add `links.github` only for public
+repos. Add `links.live` for a deployed site. A page is generated at
+`/projects/<slug>`; an optional `caseStudy` adds the deep-dive. Keep metrics honest.
 
-- [ ] Add **`public/resume.pdf`** (the Hero & Contact buttons link to `/resume.pdf`).
-- [ ] Fill in GitHub links for Nimbus AI, Lumen RAG, autoflow, Reddit Keyword Bot,
-      and LogiPilot once those repos are pushed (the `links.github` field).
-- [ ] (Optional) Replace the gradient project posters with real screenshots.
+## Conventions
+
+- Keep the design stylesheet inside `@layer base`. Its `*` reset would otherwise
+  override every Tailwind spacing utility.
+- Add colors as CSS vars (themed with `html[data-theme="light"]`), not literals.
+- Keep components server-only unless they need interactivity.
 
 ## Structure
 
 ```
 app/
-  layout.tsx              # fonts + global metadata
-  page.tsx                # home: Hero → Featured → More → About → Contact
-  projects/[slug]/page.tsx# per-project case study (static params + metadata + JSON-LD)
-  sitemap.ts, robots.ts   # SEO
-  not-found.tsx, icon.svg
-components/                # Hero, ProjectCard, ProjectGridItem, About, Contact, …
-  motion/Reveal.tsx        # scroll-reveal wrapper
-data/                      # projects.ts, profile.ts  ← edit content here
-public/                    # og.svg, resume.pdf (add yours)
+  layout.tsx               # fonts, metadata, pre-paint theme script
+  page.tsx                 # home page sections
+  projects/[slug]/page.tsx # per-project page (static params, metadata, JSON-LD)
+  sitemap.ts, robots.ts, not-found.tsx, icon.svg
+components/                # Hero, Expertise, About, Experience, Featured,
+                           # MoreProjects, Services, Contact, Nav, ThemeToggle, NetworkCanvas, ...
+data/                      # projects.ts, profile.ts
+public/                    # og.svg, Rishabh_Verma_CV.pdf
 ```
