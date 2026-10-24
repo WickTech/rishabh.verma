@@ -22,7 +22,8 @@ export const profile = {
   name: "Rishabh Verma",
   role: "Product Builder & AI Engineer",
   // Hero
-  headline: ["I build real", "products —", "end to end."],
+  // Rotating hero word: "I build <verb> end to end."
+  heroVerbs: ["AI tools", "marketplaces", "RAG engines", "payment systems", "dashboards"],
   tagline:
     "Full-stack & AI engineer shipping marketplaces, dashboards, and AI tools. From first commit to live product.",
   // About

@@ -4,7 +4,7 @@ Guidance for AI agents working in this repo.
 
 ## What this is
 
-Personal portfolio for **Rishabh Verma** — product builder & AI engineer. Next.js 15 (App Router) + React 19 + Tailwind v4, TypeScript. Single-page site plus per-project case-study pages. Design: minimalist editorial (warm monochrome, flat surfaces, serif display headings, muted pastel tints) with **light (default) + dark modes** and a persistent toggle.
+Personal portfolio for **Rishabh Verma** — product builder & AI engineer. Next.js 15 (App Router) + React 19 + Tailwind v4, TypeScript. Single-page site plus per-project case-study pages. Design: bold editorial (warm monochrome, flat surfaces, heavy condensed Big Shoulders display headings in caps, muted pastel tints, rounded viewport frame) with **light (default) + dark modes** and a persistent toggle.
 
 - Repo: `WickTech/rishabh.verma` (default branch `main`)
 - Production: https://rishabh-verma.vercel.app (Vercel, auto-deploys on push to `main`)
@@ -23,8 +23,9 @@ npm run lint     # eslint
 - **Content is data-driven.** Almost nothing is hardcoded in components — edit `data/profile.ts` (identity, experience, education, socials) and `data/projects.ts` (projects). Components render from those. To add a project, add an entry in `data/projects.ts`; `featured: true` puts it in the Work section, else the "More" grid.
 - **Case studies.** A project may carry an optional `caseStudy` (problem → architecture → metrics → outcome). When present, `/projects/[slug]` renders the deep-dive and the card links to it. Atlas is the reference example. Keep metrics honest/structural — never invent traction.
 - **Sections / flow** (in `app/page.tsx`): Hero → Work (featured) → More → Experience → About (includes the three competencies) → Services → Contact. Nav order (`components/Nav.tsx`) must stay in sync if you reorder. Projects with a screenshot and a live link are listed first (see `rank` in `data/projects.ts`).
+- **Hero** has a rotating word (`components/RotatingWord.tsx`, verbs in `profile.heroVerbs`); all words are in the HTML, reduced-motion safe. **Frame:** `.frame` wraps the page; `/projects/[slug]` recolors it per project tint via `body:has(.world-*)` and opens with a full-width title.
 - **No animated background.** `NetworkCanvas`, aurora, grid texture and gradients were removed on purpose; keep surfaces flat.
-- **Project visuals.** A project with a live site has `image` (webp screenshot in `public/projects/`, 1440x900). Others render a flat tinted spec tile (`tint` + `spec`) via `components/ProjectVisual.tsx`. No emoji.
+- **Project visuals.** A project with a live site has `image` (webp screenshot in `public/projects/`, 2880x1800). Others render a flat tinted spec tile (`tint` + `spec`) via `components/ProjectVisual.tsx`. No emoji.
 - **Theme** toggle (`components/ThemeToggle.tsx`) sets `data-theme` on `<html>` and persists `rv-theme` in localStorage; a pre-paint inline script in `app/layout.tsx` applies it before first paint to avoid a flash. `<html>` defaults to `data-theme="light"`; dark tokens live under `html[data-theme="dark"]`.
 - **Scroll reveals**: add class `reveal` to an element; `components/RevealInit.tsx` (an IntersectionObserver) handles the rest. Don't reach for framer-motion (removed).
 - **Contact form** (`components/ContactForm.tsx`) posts to **Web3Forms** (free, client-side only). The access key is a public client-side key — safe to commit; override with `NEXT_PUBLIC_WEB3FORMS_KEY`.

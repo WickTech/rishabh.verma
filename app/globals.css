@@ -30,7 +30,7 @@
   --color-tint-blue-ink: var(--tint-blue-ink);
   --color-tint-rose: var(--tint-rose);
   --color-tint-rose-ink: var(--tint-rose-ink);
-  --font-display: var(--font-source-serif), Georgia, serif;
+  --font-display: var(--font-condensed), "Arial Narrow", Impact, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
 }
 
@@ -59,10 +59,13 @@
   --tint-blue-ink: #1f6c9f;
   --tint-rose: #fdebec;
   --tint-rose-ink: #9f2f2d;
-  --font-display: var(--font-source-serif), Georgia, serif;
+  --font-display: var(--font-condensed), "Arial Narrow", Impact, sans-serif;
   --font-sans: var(--font-archivo), system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --frame: #111111;
+  --frame-pad: 14px;
+  --frame-r: 28px;
   color-scheme: light;
 }
 
@@ -88,6 +91,7 @@ html[data-theme="dark"] {
   --tint-blue-ink: #8cc4ea;
   --tint-rose: #33201f;
   --tint-rose-ink: #f0a5a2;
+  --frame: #070706;
   color-scheme: dark;
 }
 
@@ -101,7 +105,8 @@ html {
   scroll-behavior: smooth;
 }
 body {
-  background: var(--bg);
+  background: var(--frame);
+  padding: var(--frame-pad);
   color: var(--on-surface);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -165,12 +170,52 @@ li {
   top: 16px;
 }
 
+/* rounded viewport frame; project pages recolor it via body:has(.world-*) */
+.frame {
+  background: var(--bg);
+  border-radius: var(--frame-r);
+  min-height: calc(100dvh - 2 * var(--frame-pad));
+  overflow: clip;
+  position: relative;
+}
+@media (max-width: 639px) {
+  :root {
+    --frame-pad: 6px;
+    --frame-r: 16px;
+  }
+}
+body:has(.world-sage) {
+  --frame: var(--tint-sage-ink);
+}
+body:has(.world-sand) {
+  --frame: var(--tint-sand-ink);
+}
+body:has(.world-blue) {
+  --frame: var(--tint-blue-ink);
+}
+body:has(.world-rose) {
+  --frame: var(--tint-rose-ink);
+}
+body:has(.world-sage) .frame {
+  background: var(--tint-sage);
+}
+body:has(.world-sand) .frame {
+  background: var(--tint-sand);
+}
+body:has(.world-blue) .frame {
+  background: var(--tint-blue);
+}
+body:has(.world-rose) .frame {
+  background: var(--tint-rose);
+}
+
 /* type */
 .display {
   font-family: var(--font-display);
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  line-height: 0.9;
 }
 .glass {
   background: var(--surface);
@@ -180,8 +225,9 @@ li {
 /* nav */
 header.nav {
   position: fixed;
-  inset-inline: 0;
-  top: 0;
+  inset-inline: var(--frame-pad);
+  top: var(--frame-pad);
+  border-radius: var(--frame-r) var(--frame-r) 0 0;
   z-index: 50;
   border-bottom: 1px solid transparent;
   transition: background 0.3s, border-color 0.3s;
@@ -212,9 +258,10 @@ header.nav nav {
 }
 .brand {
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 19px;
-  letter-spacing: -0.01em;
+  font-weight: 900;
+  font-size: 24px;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
 }
 .navlinks {
   display: none;
@@ -330,15 +377,7 @@ html[data-theme="light"] .tgl .moon {
 .hero-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 56px;
   width: 100%;
-}
-@media (min-width: 1000px) {
-  .hero-grid {
-    grid-template-columns: 1.4fr 0.8fr;
-    gap: 72px;
-    align-items: end;
-  }
 }
 .hero-left {
   min-width: 0;
@@ -349,11 +388,35 @@ html[data-theme="light"] .tgl .moon {
   margin-bottom: 24px;
 }
 h1.hero {
-  font-size: clamp(2.6rem, 7vw, 5.2rem);
-  max-width: 14ch;
+  font-size: clamp(2.2rem, 10.6vw, 9rem);
+  letter-spacing: -0.01em;
+  line-height: 0.86;
 }
 .hero .line {
   display: block;
+}
+.hero .line.accent {
+  color: var(--accent);
+}
+.rotor {
+  display: inline-grid;
+  vertical-align: top;
+}
+.rotor > span {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(0.18em);
+  transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
+}
+.rotor > span.on {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rotor > span {
+    transition: none;
+  }
 }
 .hero-sub {
   margin-top: 28px;
@@ -376,7 +439,7 @@ h1.hero {
   gap: 28px 24px;
   border-top: 1px solid var(--line);
   padding-top: 28px;
-  max-width: 820px;
+  max-width: 900px;
 }
 @media (min-width: 640px) {
   .stats {
@@ -385,9 +448,10 @@ h1.hero {
 }
 .stat .n {
   font-family: var(--font-display);
-  font-weight: 500;
-  font-size: 2.2rem;
-  letter-spacing: -0.02em;
+  font-weight: 900;
+  font-size: 3rem;
+  text-transform: uppercase;
+  letter-spacing: 0;
   line-height: 1;
   font-variant-numeric: tabular-nums;
 }
@@ -398,11 +462,9 @@ h1.hero {
 }
 
 .hero-now {
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: var(--surface);
-  padding: 26px 28px;
-  align-self: center;
+  margin-top: 56px;
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
 }
 .hero-now h2 {
   font-family: var(--font-mono);
@@ -411,18 +473,18 @@ h1.hero {
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--faint);
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
-.hero-now dl > div {
-  padding: 14px 0;
-  border-top: 1px solid var(--line);
+.hero-now dl {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
 }
-.hero-now dl > div:first-child {
-  border-top: 0;
-  padding-top: 0;
-}
-.hero-now dl > div:last-child {
-  padding-bottom: 0;
+@media (min-width: 768px) {
+  .hero-now dl {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
 }
 .hero-now dt {
   font-size: 12px;
@@ -445,6 +507,110 @@ h1.hero {
   text-decoration: underline;
   text-underline-offset: 4px;
   text-decoration-color: var(--line-strong);
+}
+
+/* card titles: condensed face reads small, so scale up a little */
+.flagship .body h3 {
+  text-transform: none;
+  font-weight: 700;
+  font-size: 2.2rem;
+}
+.feat .body h3 {
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+.card h4 {
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+.svc h3,
+.comp h3 {
+  font-size: 1.9rem;
+  font-weight: 700;
+}
+.tl-body h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.7rem;
+  text-transform: uppercase;
+}
+.svc-price .amt,
+footer.site .fn {
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+.svc-price .amt {
+  font-size: 2.2rem;
+}
+.form-ok .display {
+  font-size: 2.2rem;
+}
+
+@media (max-width: 359px) {
+  .brand {
+    font-size: 19px;
+  }
+  .menu-btn {
+    padding: 0 10px;
+    margin-right: 6px;
+  }
+}
+
+/* project page opener */
+.opener {
+  min-height: calc(100dvh - 2 * var(--frame-pad));
+  padding: 112px 24px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+}
+@media (min-width: 640px) {
+  .opener {
+    padding: 120px 48px 48px;
+  }
+}
+.opener-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.opener-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.opener-back {
+  color: var(--on-surface-variant);
+}
+.opener-title {
+  font-size: clamp(3.5rem, 17vw, 14rem);
+  line-height: 0.86;
+  letter-spacing: -0.01em;
+  text-align: center;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+.opener-tag {
+  max-width: 40rem;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.15rem;
+  color: var(--on-surface-variant);
+}
+.opener-scroll {
+  align-self: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--on-surface-variant);
 }
 
 /* mobile menu */
@@ -497,7 +663,7 @@ section.sec {
   padding-bottom: 18px;
 }
 .sec-head h2 {
-  font-size: clamp(1.9rem, 4.5vw, 2.6rem);
+  font-size: clamp(2.8rem, 10vw, 6.5rem);
 }
 .sec-sub {
   font-size: 14px;
@@ -945,10 +1111,9 @@ section.sec {
   max-width: 62ch;
 }
 .about-main .lead {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  line-height: 1.45;
-  letter-spacing: -0.01em;
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1.5;
 }
 .about-main p:not(.lead) {
   color: var(--muted);
@@ -1103,8 +1268,8 @@ section.sec {
   border-top: 1px solid var(--line);
 }
 #contact h2 {
-  font-size: clamp(2.2rem, 6vw, 3.8rem);
-  max-width: 16ch;
+  font-size: clamp(3rem, 12vw, 9rem);
+  line-height: 0.88;
   margin: 0 auto;
 }
 #contact .sub {

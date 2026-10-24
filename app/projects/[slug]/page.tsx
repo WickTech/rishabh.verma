@@ -67,28 +67,29 @@ export default async function ProjectPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Nav />
-      <main className="content px-5 pt-32 sm:px-8">
-        <article className="mx-auto max-w-4xl">
-          {/* Back */}
-          <Link
-            href="/#work"
-            className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-text-faint transition-colors hover:text-primary"
-          >
-            ← All work
-          </Link>
-
-          {/* Header */}
-          <header className="mt-8">
-            <div className="mb-5 flex items-center gap-3">
+      <main className={`content world-${project.tint}`}>
+        {/* Opener: project name at full width */}
+        <section className="opener">
+          <div className="opener-top">
+            <Link href="/#work" className="opener-back">
+              ← All work
+            </Link>
+            <span className="opener-meta">
               <StatusBadge status={project.status} />
-              <span className="font-mono text-xs text-text-faint">{project.year}</span>
-            </div>
-            <h1 className="display text-5xl sm:text-7xl">{project.name}</h1>
-            <p className="mt-6 max-w-2xl text-xl leading-relaxed text-text-muted">
-              {project.tagline}
-            </p>
-          </header>
+              <span>{project.year}</span>
+            </span>
+          </div>
+          <h1 className="display opener-title">{project.name}</h1>
+          <p className="opener-tag">{project.tagline}</p>
+          <a href="#details" className="opener-scroll">
+            Scroll for details ↓
+          </a>
+        </section>
 
+        <article
+          id="details"
+          className="mx-auto max-w-4xl px-5 pb-16 pt-16 sm:px-8"
+        >
           {/* Screenshot */}
           {project.image && (
             <div className="mt-12 overflow-hidden rounded-lg border border-glass">

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo, JetBrains_Mono, Source_Serif_4 } from "next/font/google";
+import { Archivo, Big_Shoulders, JetBrains_Mono } from "next/font/google";
 import { profile } from "@/data/profile";
 import "./globals.css";
 
@@ -11,12 +11,11 @@ const archivo = Archivo({
   display: "swap",
 });
 
-// Source Serif 4 — editorial display headings
-const sourceSerif = Source_Serif_4({
+// Big Shoulders: condensed heavy display face for headings
+const condensed = Big_Shoulders({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
-  variable: "--font-source-serif",
+  weight: ["700", "900"],
+  variable: "--font-condensed",
   display: "swap",
 });
 
@@ -75,13 +74,13 @@ export default function RootLayout({
       lang="en"
       data-theme="light"
       suppressHydrationWarning
-      className={`${archivo.variable} ${sourceSerif.variable} ${mono.variable}`}
+      className={`${archivo.variable} ${condensed.variable} ${mono.variable}`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
       <body>
-        {children}
+        <div className="frame">{children}</div>
       </body>
     </html>
   );
