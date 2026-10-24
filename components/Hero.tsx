@@ -1,6 +1,8 @@
 import { profile } from "@/data/profile";
 import { projects } from "@/data/projects";
 import { RotatingWord } from "./RotatingWord";
+import { AskHeroButton } from "./AskHeroButton";
+import { askEnabled } from "@/lib/ask/enabled";
 
 const STATS = [
   { n: String(projects.length), l: "Projects built" },
@@ -38,6 +40,7 @@ export function Hero() {
               <a href={profile.resume} className="btn-ghost" download>
                 Download CV
               </a>
+              {askEnabled() && <AskHeroButton />}
               <a href="#services" className="text-link">
                 Hire me for a project
               </a>

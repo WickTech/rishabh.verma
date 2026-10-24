@@ -22,6 +22,8 @@ with a dark toggle.
 | Scroll reveals | `IntersectionObserver` (`components/RevealInit.tsx`), no animation library |
 | Contact form | Web3Forms (client-side; public key, override with `NEXT_PUBLIC_WEB3FORMS_KEY`) |
 | SEO | Per-project metadata, sitemap, robots, JSON-LD |
+| Assistant | "Ask my portfolio": Groq (free tier) behind `/api/ask`, grounded in the site data, optional (hidden without `GROQ_API_KEY`) |
+| Tests | vitest: `npm test` |
 | Deploy | Vercel, auto-deploys on push to `main` |
 
 ## Develop
@@ -31,6 +33,8 @@ npm install
 npm run dev      # http://localhost:3000
 npm run build    # production build (also the CI/verification step)
 npm run start    # serve the production build
+npm run lint     # eslint
+npm test         # unit tests (assistant); live evals need GROQ_API_KEY
 ```
 
 ## Page flow
