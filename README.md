@@ -76,5 +76,5 @@ app/
 components/                # Hero, Featured, MoreProjects, ProjectVisual, Experience,
                            # About, Services, Contact, Nav, ThemeToggle, ...
 data/                      # projects.ts, profile.ts
-public/                    # og.svg, Rishabh_Verma_CV.pdf, projects/*.webp
+public/                    # og.png, Rishabh_Verma_CV.pdf, projects/*.webp
 ```

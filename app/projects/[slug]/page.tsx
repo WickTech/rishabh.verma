@@ -30,7 +30,7 @@ export async function generateMetadata({
       title,
       description: project.description,
       url: `${profile.url}/projects/${project.slug}`,
-      images: [{ url: "/og.svg", width: 1200, height: 630, alt: project.name }],
+      images: [{ url: "/og.png", width: 1200, height: 630, alt: project.name }],
     },
     twitter: { card: "summary_large_image", title, description: project.description },
   };
