@@ -14,6 +14,7 @@ const LINKS = [
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -23,7 +24,7 @@ export function Nav() {
   }, []);
 
   return (
-    <header className={`nav content${scrolled ? " scrolled" : ""}`}>
+    <header className={`nav content${scrolled ? " scrolled" : ""}${open ? " open" : ""}`}>
       <div className="wrap">
         <nav>
           <a href="#hero" className="brand">
@@ -37,12 +38,32 @@ export function Nav() {
             ))}
           </ul>
           <div style={{ display: "flex", alignItems: "center" }}>
+            <button
+              type="button"
+              className="menu-btn"
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              onClick={() => setOpen((o) => !o)}
+            >
+              {open ? "Close" : "Menu"}
+            </button>
             <ThemeToggle />
-            <a href={`mailto:${profile.email}`} className="btn-grad">
+            <a href={`mailto:${profile.email}`} className="btn-grad nav-cta">
               Get in touch
             </a>
           </div>
         </nav>
+        {open && (
+          <ul id="mobile-menu" className="mobile-menu">
+            {LINKS.map((l) => (
+              <li key={l.href}>
+                <a href={l.href} onClick={() => setOpen(false)}>
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </header>
   );

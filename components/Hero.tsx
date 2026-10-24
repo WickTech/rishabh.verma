@@ -43,6 +43,35 @@ export function Hero() {
               ))}
             </div>
           </div>
+
+          <aside className="hero-now reveal" aria-label="Currently">
+            <h2>Now</h2>
+            <dl>
+              <div>
+                <dt>Building</dt>
+                <dd>
+                  <a href="https://kalakaarian.com" target="_blank" rel="noopener">
+                    Kalakaarian ↗
+                  </a>
+                  <span>Live creator marketplace, solo founder</span>
+                </dd>
+              </div>
+              <div>
+                <dt>Previously</dt>
+                <dd>
+                  Software Engineer, Futuredge
+                  <span>Banking automation, until Mar 2026</span>
+                </dd>
+              </div>
+              <div>
+                <dt>Open to</dt>
+                <dd>
+                  Full-time roles and freelance projects
+                  <span>Remote, based in Durg, India</span>
+                </dd>
+              </div>
+            </dl>
+          </aside>
         </div>
       </div>
     </section>

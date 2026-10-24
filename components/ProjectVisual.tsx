@@ -25,7 +25,13 @@ export function ProjectVisual({
   }
   return (
     <div className={`spec tint-${project.tint}`}>
-      <code className="spec-line">{project.spec ?? project.tagline}</code>
+      <ol className="spec-steps">
+        {(project.spec ?? project.tagline).split(" → ").map((step) => (
+          <li key={step}>
+            <code>{step}</code>
+          </li>
+        ))}
+      </ol>
     </div>
   );
 }
