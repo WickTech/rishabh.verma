@@ -20,7 +20,7 @@ export function Hero() {
           top: "12%",
           height: "40vw",
           width: "40vw",
-          background: "radial-gradient(circle,#0070f3,transparent 70%)",
+          background: "radial-gradient(circle,var(--electric-blue),transparent 70%)",
         }}
       />
       <div
@@ -30,7 +30,7 @@ export function Hero() {
           top: "34%",
           height: "36vw",
           width: "36vw",
-          background: "radial-gradient(circle,#d16bff,transparent 70%)",
+          background: "radial-gradient(circle,var(--soft-purple),transparent 70%)",
           animationDelay: "-8s",
         }}
       />

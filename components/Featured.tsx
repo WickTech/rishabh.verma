@@ -25,8 +25,8 @@ export function Featured() {
               <div className="meta">
                 <span className="badge live">
                   <span className="dot" style={{ height: 6, width: 6 }}>
-                    <span style={{ background: "#34d399" }} />
-                    <span style={{ background: "#34d399" }} />
+                    <span style={{ background: "var(--emerald)" }} />
+                    <span style={{ background: "var(--emerald)" }} />
                   </span>
                   Live in production
                 </span>

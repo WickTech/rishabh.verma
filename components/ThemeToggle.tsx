@@ -8,7 +8,7 @@
 export function ThemeToggle() {
   const toggle = () => {
     const root = document.documentElement;
-    const light = root.getAttribute("data-theme") !== "light";
+    const light = root.getAttribute("data-theme") === "dark";
     root.setAttribute("data-theme", light ? "light" : "dark");
     try {
       localStorage.setItem("rv-theme", light ? "light" : "dark");
@@ -20,8 +20,8 @@ export function ThemeToggle() {
     <button
       className="tgl"
       onClick={toggle}
-      aria-label="Toggle theme"
-      title="Toggle theme"
+      aria-label="Switch between light and dark theme"
+      title="Switch theme"
     >
       <svg className="sun" viewBox="0 0 24 24">
         <circle cx="12" cy="12" r="4" />

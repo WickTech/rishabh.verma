@@ -47,7 +47,7 @@
   --on-surface: #dfe1f6;
   --on-surface-variant: #ccc3d7;
   --muted: #aaa6c3;
-  --faint: #6b6980;
+  --faint: #8d8aa6;
   --primary: #d1bcff;
   --soft-purple: #b48cf2;
   --electric-blue: #2f6fe0;
@@ -65,10 +65,12 @@
   --font-serif: var(--font-source-serif), Georgia, serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, "JetBrains Mono", monospace;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  color-scheme: dark;
 }
 
 /* ---- Light theme (brand light tokens) ---- */
 html[data-theme="light"] {
+  color-scheme: light;
   --bg: #e9edf2;
   --surface: #f6f8fa;
   --surface-lowest: #eef1f6;
@@ -80,12 +82,12 @@ html[data-theme="light"] {
   --on-surface: #10141c;
   --on-surface-variant: #2b3340;
   --muted: #5a6577;
-  --faint: #8a93a3;
+  --faint: #5c6678;
   --primary: #1d3fa8;
   --soft-purple: #6f3fd1;
   --electric-blue: #1d3fa8;
   --secondary: #0e7490;
-  --tertiary: #c77a12;
+  --tertiary: #9a5b00;
   --card-a: #ffffff;
   --card-b: #e6ebf2;
   --net-line: 29, 63, 168;
@@ -319,8 +321,8 @@ header.nav nav {
   color: var(--on-surface);
 }
 .tgl {
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
   border-radius: 8px;
   border: 1px solid var(--glass);
   background: rgba(255, 255, 255, 0.03);

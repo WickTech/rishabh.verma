@@ -65,7 +65,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-// Set the persisted theme on <html> before first paint (no flash of dark).
+// Set the persisted theme on <html> before first paint (light is the default; no flash).
 const THEME_SCRIPT = `(function(){try{var t=localStorage.getItem('rv-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`;
 
 export default function RootLayout({
@@ -74,7 +74,8 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      data-theme="dark"
+      data-theme="light"
+      suppressHydrationWarning
       className={`${archivo.variable} ${sourceSerif.variable} ${mono.variable}`}
     >
       <head>
