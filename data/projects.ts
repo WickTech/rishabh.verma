@@ -163,7 +163,7 @@ export const projects: Project[] = [
     accent: ["#38bdf8", "#8b5cf6"],
   },
   {
-    slug: "ai-orc",
+    slug: "axion",
     name: "Axion",
     emoji: "🛠️",
     tagline:
