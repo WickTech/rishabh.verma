@@ -8,7 +8,7 @@ import { profile } from "@/data/profile";
 // inbox, so it is safe to commit. Override via NEXT_PUBLIC_WEB3FORMS_KEY.
 const ACCESS_KEY =
   process.env.NEXT_PUBLIC_WEB3FORMS_KEY ??
-  "a74e187f-bcd6-4482-aec5-ee47a8c21919";
+  "9930779b-ef3f-43aa-89eb-6d7634afff66";
 
 type Status = "idle" | "sending" | "ok" | "error";
 
