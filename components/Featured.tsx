@@ -19,7 +19,7 @@ export function Featured() {
               <ProjectVisual
                 project={flagship}
                 priority
-                sizes="(min-width: 900px) 560px, 100vw"
+                sizes="(min-width: 900px) 900px, 100vw"
               />
             </div>
             <div className="body">

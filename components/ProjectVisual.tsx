@@ -20,6 +20,7 @@ export function ProjectVisual({
         fill
         sizes={sizes}
         priority={priority}
+        quality={priority ? 90 : 80}
       />
     );
   }
