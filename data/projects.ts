@@ -79,18 +79,18 @@ export const projects: Project[] = [
     image: { src: "/projects/atlas.webp", alt: "Atlas dashboard: globe with regional risk layers and a country instability index" },
     name: "Atlas",
     tagline:
-      "India-first global news, market-sentiment & intelligence dashboard.",
+      "Real-time global situational-awareness console: country risk, markets and world news on a 3D globe.",
     description:
-      "Atlas fuses live world news, market data, and AI briefings into one India-centered intelligence dashboard. It pulls from GDELT, Alpha Vantage, CoinGecko, and Yahoo Finance, scores per-country risk, correlates cross-stream signals, and generates AI briefs — all behind a resilient cache that never blanks the feed.",
+      "Atlas brings country risk, cross-stream signals, markets and world news into one console on a GPU-rendered globe. It runs entirely on free, keyless, open data (publisher RSS, GDELT, Yahoo Finance, USGS, NASA EONET and more), generates AI briefs with a deterministic fallback, and keeps the last good data on screen when an upstream fails.",
     role: "Full-stack engineer",
     year: "2026",
-    stack: ["React", "Vite", "Node.js", "Express", "Chart.js", "Groq"],
+    stack: ["Next.js", "TypeScript", "MapLibre", "deck.gl", "Tailwind"],
     status: "oss",
     highlights: [
-      "Live multi-source pipeline: GDELT news, finance, crypto, per-article sentiment",
-      "India-centered choropleth risk map + Country Intelligence Index",
-      "Cross-stream signal correlation (surges, hotspots, convergence)",
-      "AI briefs via Groq with rule-based fallback; ⌘K command palette",
+      "Per-country risk choropleth and a country instability index on a WebGL globe",
+      "Live layers: news, earthquakes, disasters, aircraft, internet outages, markets",
+      "AI briefs via Groq or OpenRouter, with a deterministic fallback",
+      "Shareable deep links: layers, filters and camera sync to the URL",
     ],
     links: {
       live: "https://atlas-eight-fawn.vercel.app",
@@ -100,47 +100,47 @@ export const projects: Project[] = [
     tint: "blue",
     caseStudy: {
       problem:
-        "Global-event intelligence is scattered across news, equities, and crypto — each behind its own flaky, rate-limited API, and almost none of it framed for an India-first reader. Naive dashboards that fan out to those APIs on every load go blank the moment one upstream throttles or fails. Atlas set out to fuse those streams into a single, India-centered pane that stays up even when its sources don't.",
+        "Global-event intelligence is scattered across news, markets, hazards and infrastructure feeds, each behind its own flaky, rate-limited API. Dashboards that fan out to every source on each load go blank the moment one upstream throttles or fails. Atlas set out to put those streams in a single console that keeps working when its sources do not.",
       architecture: [
         {
-          title: "Multi-source ingestion, normalized",
+          title: "Free, keyless data pipeline",
           detail:
-            "GDELT (world news), Alpha Vantage (equities), CoinGecko (crypto), and Yahoo Finance are pulled on independent schedules and normalized into one event stream, so downstream scoring never cares which source a signal came from.",
+            "Server route handlers pull publisher RSS, GDELT, Yahoo Finance, NASA EONET and GDACS, adsb.lol and IODA, normalize them, and serve them with CDN caching (s-maxage plus stale-while-revalidate). No API key is required to run it.",
         },
         {
-          title: "Per-country risk → Country Intelligence Index",
+          title: "Risk scoring and cross-stream signals",
           detail:
-            "Each article is scored for sentiment and mapped to a country; those roll up into a per-country risk index rendered as an India-centered choropleth — the reader's home region is the anchor, not an afterthought.",
+            "News is tagged to countries and rolled up into a per-country risk score, drawn as a choropleth on the globe. A signals pass looks across news, markets and hazards together to surface the moments where several streams move at once.",
         },
         {
-          title: "Cross-stream signal correlation",
+          title: "One WebGL context",
           detail:
-            "A correlation pass looks across news, markets, and crypto together to surface surges, hotspots, and convergence — the moments where multiple independent streams move at once.",
+            "MapLibre GL renders the globe and the choropleth; deck.gl layers are interleaved in the same context. The map loads as a lazy chunk so the initial bundle stays small.",
         },
         {
-          title: "AI briefs with a rule-based fallback",
+          title: "Resilient client data layer",
           detail:
-            "Briefings are generated via Groq, but degrade to a deterministic rule-based summary when the model is unavailable — the feed always has a brief, never an error card.",
+            "TanStack Query polls with exponential backoff, pauses in background tabs, and retains the last good data, so an upstream outage costs freshness and not the whole view.",
         },
         {
-          title: "Resilience layer that never blanks the feed",
+          title: "AI briefs with a fallback",
           detail:
-            "A caching layer serves the last good snapshot when an upstream is rate-limited or down, so a third-party outage degrades freshness, not availability.",
+            "Briefs come from Groq or OpenRouter when a key is available and fall back to a deterministic summary otherwise. Server routes validate input, cache results and rate-limit.",
         },
         {
-          title: "⌘K command palette",
+          title: "URL as state",
           detail:
-            "Keyboard-first navigation across countries, streams, and views for fast operator-style use.",
+            "Layers, filters, camera and selection live in a Zustand store with debounced two-way URL sync, so any view can be shared as a link.",
         },
       ],
       metrics: [
-        { value: "4", label: "Live data sources fused" },
-        { value: "3", label: "Streams: news · equities · crypto" },
-        { value: "0", label: "Blank states on upstream failure" },
-        { value: "⌘K", label: "Keyboard-first navigation" },
+        { value: "12", label: "Publisher RSS feeds" },
+        { value: "0", label: "API keys required to run" },
+        { value: "1", label: "WebGL context for globe and layers" },
+        { value: "165 kB", label: "Initial JS, gzipped" },
       ],
       outcome:
-        "Atlas runs live as a single India-first intelligence dashboard that holds together under real-world API flakiness — the resilient cache and rule-based fallbacks mean an upstream outage costs freshness, not the whole page. It's the clearest demonstration in this portfolio of wiring messy real-world data sources, AI, and a resilience story into one coherent product.",
+        "Atlas is live as a single console that holds together under real-world API flakiness: caching and last-good-data retention mean an upstream outage degrades freshness, not availability. It shows how I wire messy public data, a WebGL map and an AI layer into one product with CI and production smoke tests.",
     },
   },
   {
