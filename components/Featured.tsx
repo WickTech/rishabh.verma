@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { featuredProjects, STATUS_LABEL } from "@/data/projects";
 
 const poster = (a: [string, string]) =>
@@ -20,8 +21,19 @@ export function Featured() {
         {/* Flagship */}
         <div className="flagship reveal">
           <div className="flagship-inner">
-            <div className="poster">
-              <div className="flag-glow" />
+            <div className={`poster${flagship.image ? " has-shot" : ""}`}>
+              {flagship.image ? (
+                <Image
+                  className="shot"
+                  src={flagship.image.src}
+                  alt={flagship.image.alt}
+                  fill
+                  priority
+                  sizes="(min-width: 900px) 560px, 100vw"
+                />
+              ) : (
+                <div className="flag-glow" />
+              )}
               <div className="meta">
                 <span className="badge live">
                   <span className="dot" style={{ height: 6, width: 6 }}>
@@ -34,10 +46,12 @@ export function Featured() {
                   {flagship.year} · Flagship
                 </span>
               </div>
-              <div className="big">
-                {flagship.name.slice(0, 4)}
-                <em>{flagship.name.slice(4)}</em>
-              </div>
+              {!flagship.image && (
+                <div className="big">
+                  {flagship.name.slice(0, 4)}
+                  <em>{flagship.name.slice(4)}</em>
+                </div>
+              )}
               {flagship.links.live && (
                 <a
                   href={flagship.links.live}
@@ -96,11 +110,23 @@ export function Featured() {
           {rest.map((p, i) => (
             <article className="feat reveal" key={p.slug}>
               <div
-                className="poster"
-                style={{ backgroundImage: poster(p.accent) }}
+                className={`poster${p.image ? " has-shot" : ""}`}
+                style={p.image ? undefined : { backgroundImage: poster(p.accent) }}
               >
-                <span className="em">{p.emoji}</span>
-                <span className="num stroke display">0{i + 2}</span>
+                {p.image ? (
+                  <Image
+                    className="shot"
+                    src={p.image.src}
+                    alt={p.image.alt}
+                    fill
+                    sizes="(min-width: 820px) 300px, 100vw"
+                  />
+                ) : (
+                  <>
+                    <span className="em">{p.emoji}</span>
+                    <span className="num stroke display">0{i + 2}</span>
+                  </>
+                )}
               </div>
               <div className="body">
                 <div className="meta">

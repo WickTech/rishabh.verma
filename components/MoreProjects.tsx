@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { moreProjects, STATUS_LABEL } from "@/data/projects";
 
 export function MoreProjects() {
@@ -14,6 +15,17 @@ export function MoreProjects() {
         <div className="more-grid">
           {moreProjects.map((p) => (
             <div className="card glass reveal" key={p.slug}>
+              {p.image && (
+                <div className="thumb">
+                  <Image
+                    src={p.image.src}
+                    alt={p.image.alt}
+                    width={1440}
+                    height={900}
+                    sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw"
+                  />
+                </div>
+              )}
               <div className="top">
                 <span className="em">{p.emoji}</span>
                 <span className={`badge ${p.status}`}>

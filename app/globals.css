@@ -1516,4 +1516,53 @@ li {
   top: 16px;
 }
 
+/* project screenshots */
+.poster.has-shot {
+  padding: 0;
+  min-height: 0;
+  aspect-ratio: 16 / 10;
+}
+/* side-by-side layouts: the image fills the column height instead */
+@media (min-width: 900px) {
+  .flagship .poster.has-shot {
+    aspect-ratio: auto;
+    min-height: 360px;
+  }
+}
+@media (min-width: 820px) {
+  .feat .poster.has-shot {
+    aspect-ratio: auto;
+    min-height: 200px;
+  }
+}
+.poster .shot {
+  object-fit: cover;
+  object-position: top left;
+}
+.flagship .poster.has-shot .meta {
+  position: absolute;
+  inset: 16px 16px auto 16px;
+  z-index: 1;
+}
+.flagship .poster.has-shot .url {
+  position: absolute;
+  left: 16px;
+  bottom: 14px;
+  z-index: 1;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: color-mix(in oklab, var(--bg) 82%, transparent);
+}
+.card .thumb {
+  margin: -24px -24px 0;
+  border-radius: 14px 14px 0 0;
+  overflow: hidden;
+  border-bottom: 1px solid var(--glass);
+}
+.card .thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 } /* end @layer base */

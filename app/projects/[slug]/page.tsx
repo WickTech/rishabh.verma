@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -97,16 +98,30 @@ export default async function ProjectPage({
           </header>
 
           {/* Poster band */}
-          <div
-            className="mt-12 flex aspect-[2/1] items-center justify-center overflow-hidden rounded-xl border border-glass border-t-white/10"
-            style={{
-              backgroundImage: `radial-gradient(120% 120% at 0% 0%, ${from}33, transparent 55%), radial-gradient(120% 120% at 100% 100%, ${to}33, transparent 55%), linear-gradient(160deg, #1d1836, #0a0d1c)`,
-            }}
-          >
-            <span aria-hidden className="text-[clamp(5rem,18vw,11rem)]">
-              {project.emoji}
-            </span>
-          </div>
+          {project.image ? (
+            <div className="mt-12 overflow-hidden rounded-xl border border-glass">
+              <Image
+                src={project.image.src}
+                alt={project.image.alt}
+                width={1440}
+                height={900}
+                priority
+                sizes="(min-width: 1024px) 960px, 100vw"
+                className="block h-auto w-full"
+              />
+            </div>
+          ) : (
+            <div
+              className="mt-12 flex aspect-[2/1] items-center justify-center overflow-hidden rounded-xl border border-glass border-t-white/10"
+              style={{
+                backgroundImage: `radial-gradient(120% 120% at 0% 0%, ${from}33, transparent 55%), radial-gradient(120% 120% at 100% 100%, ${to}33, transparent 55%), linear-gradient(160deg, #1d1836, #0a0d1c)`,
+              }}
+            >
+              <span aria-hidden className="text-[clamp(5rem,18vw,11rem)]">
+                {project.emoji}
+              </span>
+            </div>
+          )}
 
           {/* Metrics strip (case study) */}
           {cs && (

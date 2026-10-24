@@ -33,6 +33,8 @@ export interface Project {
   links: ProjectLinks;
   /** featured cards render large on the home page; the rest go in the grid */
   featured: boolean;
+  /** screenshot of the live site (1440x900), shown on cards and the project page */
+  image?: { src: string; alt: string };
   /** two hex stops used for the card's gradient accent */
   accent: [string, string];
   /** optional long-form case study rendered on the project page */
@@ -45,6 +47,7 @@ export const projects: Project[] = [
   /* ---------------------------------------------------------------- */
   {
     slug: "kalakaarian",
+    image: { src: "/projects/kalakaarian.webp", alt: "Kalakaarian home page: 'Your next creator campaign starts here' with creator illustrations" },
     name: "Kalakaarian",
     emoji: "🎨",
     tagline:
@@ -71,6 +74,7 @@ export const projects: Project[] = [
   },
   {
     slug: "atlas",
+    image: { src: "/projects/atlas.webp", alt: "Atlas dashboard: globe with regional risk layers and a country instability index" },
     name: "Atlas",
     emoji: "🌍",
     tagline:
@@ -140,6 +144,7 @@ export const projects: Project[] = [
   },
   {
     slug: "skyline",
+    image: { src: "/projects/skyline.webp", alt: "Skyline showing current weather and air quality for London" },
     name: "Skyline",
     emoji: "🌤️",
     tagline: "One search — current weather and air quality, anywhere.",
@@ -190,6 +195,7 @@ export const projects: Project[] = [
   /* ---------------------------------------------------------------- */
   {
     slug: "nimbus-ai",
+    image: { src: "/projects/nimbus-ai.webp", alt: "Nimbus AI landing page: 'Ship an AI product, not boilerplate'" },
     name: "Nimbus AI",
     emoji: "🌩️",
     tagline:
@@ -214,6 +220,7 @@ export const projects: Project[] = [
   },
   {
     slug: "lumen-rag",
+    image: { src: "/projects/lumen-rag.webp", alt: "Lumen RAG live demo: load documents, ask a question, run retrieval eval" },
     name: "Lumen RAG",
     emoji: "🔦",
     tagline:
@@ -259,6 +266,7 @@ export const projects: Project[] = [
   },
   {
     slug: "logipilot",
+    image: { src: "/projects/logipilot.webp", alt: "LogiPilot merchant portal home page: 'Always moving forward'" },
     name: "LogiPilot",
     emoji: "🚚",
     tagline:
@@ -365,6 +373,7 @@ export const projects: Project[] = [
   },
   {
     slug: "samya",
+    image: { src: "/projects/samya.webp", alt: "Sāmya cloud kitchen home page with menu and WhatsApp order buttons" },
     name: "Sāmya",
     emoji: "🥗",
     tagline: "Website for a wellness-focused cloud kitchen in Bhilai–Durg.",
