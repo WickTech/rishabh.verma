@@ -108,7 +108,7 @@ export function NetworkCanvas() {
           const dy = a.y - b.y;
           const d = Math.hypot(dx, dy);
           if (d < R) {
-            x!.strokeStyle = tint(0.12 * (1 - d / R));
+            x!.strokeStyle = tint(0.07 * (1 - d / R));
             x!.lineWidth = dpr * 0.6;
             x!.beginPath();
             x!.moveTo(a.x, a.y);
@@ -122,10 +122,10 @@ export function NetworkCanvas() {
         const near = dm < 180 * dpr;
         x!.beginPath();
         x!.arc(p.x, p.y, p.r * (near ? 1.8 : 1), 0, 7);
-        x!.fillStyle = near ? hiRGBA(0.9) : tint(0.55);
+        x!.fillStyle = near ? hiRGBA(0.6) : tint(0.35);
         x!.fill();
         if (near) {
-          x!.strokeStyle = hiRGBA(0.35 * (1 - dm / (180 * dpr)));
+          x!.strokeStyle = hiRGBA(0.18 * (1 - dm / (180 * dpr)));
           x!.lineWidth = dpr * 0.7;
           x!.beginPath();
           x!.moveTo(p.x, p.y);
@@ -139,7 +139,7 @@ export function NetworkCanvas() {
       for (const rp of ripples) {
         const t = (now - rp.born) / rp.life; // 0..1
         const rad = rp.max * (1 - Math.pow(1 - t, 2)); // ease-out expand
-        const alpha = (1 - t) * 0.5;
+        const alpha = (1 - t) * 0.18;
         x!.strokeStyle = hiRGBA(alpha);
         x!.lineWidth = dpr * (1.4 * (1 - t) + 0.3);
         x!.beginPath();

@@ -1,11 +1,10 @@
-import Image from "next/image";
 import { profile } from "@/data/profile";
 import { projects } from "@/data/projects";
 
 const SHIPPED = projects.map((p) => `${p.emoji} ${p.name}`);
 
 const STATS = [
-  { n: "9", l: "Products shipped" },
+  { n: String(projects.length), l: "Products shipped" },
   { n: "1", l: "Live marketplace" },
   { n: "∞", l: "Full-stack + AI" },
   { n: "Durg", l: "India, remote-ready" },
@@ -71,20 +70,6 @@ export function Hero() {
                   <div className="l">{s.l}</div>
                 </div>
               ))}
-            </div>
-          </div>
-
-          <div className="hero-portrait reveal">
-            <div className="pglow" aria-hidden />
-            <div className="frame">
-              <Image
-                src="/portrait.jpeg"
-                alt={`${profile.name} — ${profile.role}`}
-                width={1023}
-                height={1537}
-                priority
-                sizes="(min-width: 980px) 400px, 340px"
-              />
             </div>
           </div>
         </div>
