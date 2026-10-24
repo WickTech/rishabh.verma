@@ -108,6 +108,9 @@ export function ContactForm() {
       <button type="submit" className="btn-grad" disabled={status === "sending"}>
         {status === "sending" ? "Sending…" : "Send message →"}
       </button>
+      <p className="form-note">
+        Messages are sent through Web3Forms and used only to reply to you.
+      </p>
     </form>
   );
 }

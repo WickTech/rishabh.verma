@@ -1205,6 +1205,10 @@ section.sec {
   opacity: 0.6;
   cursor: default;
 }
+.form-note {
+  font-size: 13px;
+  color: var(--faint);
+}
 .form-err {
   font-size: 14px;
   color: var(--tint-rose-ink);
