@@ -23,8 +23,11 @@ export default function Home() {
   return (
     <>
       <RevealInit />
+      <a href="#main" className="skip-link">
+        Skip to content
+      </a>
       <Nav />
-      <main className="content">
+      <main id="main" className="content">
         <Hero />
         <Beam />
         <Expertise />

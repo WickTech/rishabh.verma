@@ -6,7 +6,7 @@ export function Footer() {
       <div className="wrap inner">
         <div>
           <p className="fn">{profile.name}</p>
-          <p className="fnote">Crafted with technical precision.</p>
+          <p className="fnote">Built with Next.js, hosted on Vercel.</p>
         </div>
         <nav>
           {profile.socials.map((s) => (

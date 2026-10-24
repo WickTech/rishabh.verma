@@ -49,8 +49,8 @@
   --muted: #aaa6c3;
   --faint: #6b6980;
   --primary: #d1bcff;
-  --soft-purple: #d16bff;
-  --electric-blue: #0070f3;
+  --soft-purple: #b48cf2;
+  --electric-blue: #2f6fe0;
   --secondary: #4cd6ff;
   --tertiary: #ffb86c;
   --emerald: #34d399;
@@ -1462,6 +1462,56 @@ footer.site .cp {
 .svc-note a {
   color: var(--secondary);
   text-decoration: underline;
+}
+
+/* polish: typography, states, accessibility */
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+p,
+li {
+  text-wrap: pretty;
+}
+.hero-sub,
+.sec p {
+  max-width: 68ch;
+}
+.stat .n,
+.svc-price,
+.idx {
+  font-variant-numeric: tabular-nums;
+}
+.btn-grad,
+.btn-ghost,
+.tgl {
+  transition: opacity 0.2s, transform 0.15s, border-color 0.3s, box-shadow 0.3s;
+}
+.btn-grad:active,
+.btn-ghost:active,
+.tgl:active {
+  transform: scale(0.98) translateY(1px);
+}
+:focus-visible {
+  outline: 2px solid var(--secondary);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.skip-link {
+  position: fixed;
+  left: 16px;
+  top: -64px;
+  z-index: 100;
+  padding: 10px 16px;
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--on-surface);
+  border: 1px solid var(--line-strong);
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 16px;
 }
 
 } /* end @layer base */
