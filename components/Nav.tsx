@@ -5,10 +5,9 @@ import { profile } from "@/data/profile";
 import { ThemeToggle } from "./ThemeToggle";
 
 const LINKS = [
-  { href: "#expertise", label: "Expertise" },
-  { href: "#about", label: "About" },
-  { href: "#experience", label: "Experience" },
   { href: "#work", label: "Work" },
+  { href: "#experience", label: "Experience" },
+  { href: "#about", label: "About" },
   { href: "#services", label: "Services" },
   { href: "#contact", label: "Contact" },
 ];
@@ -40,7 +39,7 @@ export function Nav() {
           <div style={{ display: "flex", alignItems: "center" }}>
             <ThemeToggle />
             <a href={`mailto:${profile.email}`} className="btn-grad">
-              Hire me
+              Get in touch
             </a>
           </div>
         </nav>

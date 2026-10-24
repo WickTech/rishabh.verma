@@ -4,20 +4,11 @@ import { ContactForm } from "./ContactForm";
 export function Contact() {
   return (
     <section id="contact">
-      <div className="glow" />
       <div className="wrap">
         <div className="reveal">
-          <p className="kicker" style={{ marginBottom: 24 }}>
-            Open to work &amp; collaboration
-          </p>
-          <h2 className="display">
-            Let&apos;s build
-            <br />
-            <span className="flux">something real.</span>
-          </h2>
+          <h2 className="display">Let&apos;s build something real.</h2>
           <p className="sub">
-            Have a product in mind, a role to fill, or just want to talk shop? My
-            inbox is open.
+            Have a product in mind or a role to fill? Send a message and I will reply by email.
           </p>
 
           <ContactForm />

@@ -1,21 +1,20 @@
 import type { Metadata } from "next";
 import { Archivo, JetBrains_Mono, Source_Serif_4 } from "next/font/google";
 import { profile } from "@/data/profile";
-import { NetworkCanvas } from "@/components/NetworkCanvas";
 import "./globals.css";
 
-// Archivo — display + body (the design's primary typeface)
+// Archivo — body and UI
 const archivo = Archivo({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-archivo",
   display: "swap",
 });
 
-// Source Serif 4 — editorial serif accents
+// Source Serif 4 — editorial display headings
 const sourceSerif = Source_Serif_4({
   subsets: ["latin"],
-  weight: ["400", "600"],
+  weight: ["400", "500", "600"],
   style: ["normal", "italic"],
   variable: "--font-source-serif",
   display: "swap",
@@ -82,10 +81,6 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
       <body>
-        {/* Fixed background layers (z-0/1), behind the content layer (z-10) */}
-        <NetworkCanvas />
-        <div className="grid-tex" aria-hidden />
-        <div className="ambient" aria-hidden />
         {children}
       </body>
     </html>

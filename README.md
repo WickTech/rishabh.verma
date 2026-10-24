@@ -7,10 +7,10 @@
 
 Live: **https://rishabh-verma.vercel.app**
 
-Personal portfolio of a product builder and AI engineer. Showcases shipped
-products (a live influencer marketplace, an intelligence dashboard, RAG and
-payments engines, developer tooling), a fixed-price services section, and
-per-project case studies. Dark and light themes.
+Personal portfolio of a product builder and AI engineer. Shows built projects
+(with live-site screenshots), experience, a fixed-price freelance services
+section and per-project pages. Minimalist editorial design, light by default
+with a dark toggle.
 
 ## Stack
 
@@ -18,8 +18,7 @@ per-project case studies. Dark and light themes.
 |---|---|
 | Framework | Next.js 15 (App Router) + React 19 |
 | Language | TypeScript |
-| Styling | Tailwind CSS v4 (`@theme` bridge) + a design stylesheet in `@layer base` (`app/globals.css`) |
-| Background | 2D-canvas node network (`components/NetworkCanvas.tsx`), low intensity, off under `prefers-reduced-motion` |
+| Styling | Tailwind CSS v4 (`@theme` bridge) + a flat design stylesheet in `@layer base` (`app/globals.css`) |
 | Scroll reveals | `IntersectionObserver` (`components/RevealInit.tsx`), no animation library |
 | Contact form | Web3Forms (client-side; public key, override with `NEXT_PUBLIC_WEB3FORMS_KEY`) |
 | SEO | Per-project metadata, sitemap, robots, JSON-LD |
@@ -36,20 +35,20 @@ npm run start    # serve the production build
 
 ## Page flow
 
-Hero → Expertise (01) → About (02) → Experience (03) → Work (04) → More (05)
-→ Services (06) → Contact. Section numbers and the nav order
-(`components/Nav.tsx`) must stay in sync if you reorder.
+Hero → Work → More → Experience → About → Services → Contact. Keep the nav
+order (`components/Nav.tsx`) in sync if you reorder.
 
 ## Where the content lives
 
 Content is data-driven; edit data, not components.
 
 - **`data/projects.ts`**: every project (cards, routes, SEO). Fields: `slug, name,
-  emoji, tagline, description, role, year, stack[], status ('live' | 'oss' | 'wip'),
-  highlights[], links{live?, github?}, featured, accent, caseStudy?`.
+  tagline, description, role, year, stack[], status ('live' | 'oss' | 'wip'),
+  highlights[], links{live?, github?}, featured, tint, image?, spec?, caseStudy?`.
 - **`data/profile.ts`**: name, role, hero copy, about text, toolbox, experience,
   education, socials, résumé path.
-- **`components/Services.tsx`**: service cards and starting prices (INR).
+- **`components/Services.tsx`**: service rows and starting prices (INR).
+- **`public/projects/<slug>.webp`**: 1440x900 screenshots of live sites, referenced by `image` in `data/projects.ts`.
 
 ### Adding a project
 
@@ -62,7 +61,8 @@ repos. Add `links.live` for a deployed site. A page is generated at
 
 - Keep the design stylesheet inside `@layer base`. Its `*` reset would otherwise
   override every Tailwind spacing utility.
-- Add colors as CSS vars (themed with `html[data-theme="light"]`), not literals.
+- Add colors as CSS vars (dark overrides under `html[data-theme="dark"]`), not literals.
+- No gradients, glow, glass or emoji; keep surfaces flat.
 - Keep components server-only unless they need interactivity.
 
 ## Structure
@@ -73,8 +73,8 @@ app/
   page.tsx                 # home page sections
   projects/[slug]/page.tsx # per-project page (static params, metadata, JSON-LD)
   sitemap.ts, robots.ts, not-found.tsx, icon.svg
-components/                # Hero, Expertise, About, Experience, Featured,
-                           # MoreProjects, Services, Contact, Nav, ThemeToggle, NetworkCanvas, ...
+components/                # Hero, Featured, MoreProjects, ProjectVisual, Experience,
+                           # About, Services, Contact, Nav, ThemeToggle, ...
 data/                      # projects.ts, profile.ts
-public/                    # og.svg, Rishabh_Verma_CV.pdf
+public/                    # og.svg, Rishabh_Verma_CV.pdf, projects/*.webp
 ```

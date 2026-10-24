@@ -45,7 +45,6 @@ export default async function ProjectPage({
   const project = getProject(slug);
   if (!project) notFound();
 
-  const [from, to] = project.accent;
   const cs = project.caseStudy;
   const index = projects.findIndex((p) => p.slug === project.slug);
   const next = projects[(index + 1) % projects.length];
@@ -84,22 +83,15 @@ export default async function ProjectPage({
               <StatusBadge status={project.status} />
               <span className="font-mono text-xs text-text-faint">{project.year}</span>
             </div>
-            <div className="flex items-center gap-5">
-              <span aria-hidden className="text-6xl sm:text-7xl">
-                {project.emoji}
-              </span>
-              <h1 className="display text-5xl sm:text-7xl">
-                <span className="flux">{project.name}</span>
-              </h1>
-            </div>
+            <h1 className="display text-5xl sm:text-7xl">{project.name}</h1>
             <p className="mt-6 max-w-2xl text-xl leading-relaxed text-text-muted">
               {project.tagline}
             </p>
           </header>
 
-          {/* Poster band */}
-          {project.image ? (
-            <div className="mt-12 overflow-hidden rounded-xl border border-glass">
+          {/* Screenshot */}
+          {project.image && (
+            <div className="mt-12 overflow-hidden rounded-lg border border-glass">
               <Image
                 src={project.image.src}
                 alt={project.image.alt}
@@ -110,17 +102,6 @@ export default async function ProjectPage({
                 className="block h-auto w-full"
               />
             </div>
-          ) : (
-            <div
-              className="mt-12 flex aspect-[2/1] items-center justify-center overflow-hidden rounded-xl border border-glass border-t-white/10"
-              style={{
-                backgroundImage: `radial-gradient(120% 120% at 0% 0%, ${from}33, transparent 55%), radial-gradient(120% 120% at 100% 100%, ${to}33, transparent 55%), linear-gradient(160deg, #1d1836, #0a0d1c)`,
-              }}
-            >
-              <span aria-hidden className="text-[clamp(5rem,18vw,11rem)]">
-                {project.emoji}
-              </span>
-            </div>
           )}
 
           {/* Metrics strip (case study) */}
@@ -128,7 +109,7 @@ export default async function ProjectPage({
             <div className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-glass bg-glass sm:grid-cols-4">
               {cs.metrics.map((m) => (
                 <div key={m.label} className="bg-surface-lowest p-6">
-                  <div className="display text-4xl leading-none tracking-tight flux">
+                  <div className="display text-4xl leading-none tracking-tight">
                     {m.value}
                   </div>
                   <div className="mt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-text-faint">
@@ -250,8 +231,7 @@ export default async function ProjectPage({
                 <li key={h} className="flex gap-3 text-text-muted">
                   <span
                     aria-hidden
-                    className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full"
-                    style={{ background: `linear-gradient(90deg, ${from}, ${to})` }}
+                    className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
                   />
                   <span className="leading-relaxed">{h}</span>
                 </li>
@@ -304,7 +284,7 @@ export default async function ProjectPage({
                 Next project
               </span>
               <p className="display mt-2 text-3xl text-on-surface transition-colors group-hover:text-primary sm:text-4xl">
-                {next.emoji} {next.name}
+                {next.name}
               </p>
             </div>
             <span

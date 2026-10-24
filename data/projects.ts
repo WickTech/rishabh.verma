@@ -1,3 +1,5 @@
+export type Tint = "sage" | "sand" | "blue" | "rose";
+
 export type ProjectStatus = "live" | "oss" | "wip";
 
 export interface ProjectLinks {
@@ -20,7 +22,6 @@ export interface CaseStudy {
 export interface Project {
   slug: string;
   name: string;
-  emoji: string;
   /** short one-liner shown on cards */
   tagline: string;
   /** longer paragraph shown on the case-study page */
@@ -35,8 +36,10 @@ export interface Project {
   featured: boolean;
   /** screenshot of the live site (1440x900), shown on cards and the project page */
   image?: { src: string; alt: string };
-  /** two hex stops used for the card's gradient accent */
-  accent: [string, string];
+  /** one line of real substance shown on cards that have no screenshot */
+  spec?: string;
+  /** muted pastel used for the card tile and badges */
+  tint: Tint;
   /** optional long-form case study rendered on the project page */
   caseStudy?: CaseStudy;
 }
@@ -49,7 +52,6 @@ export const projects: Project[] = [
     slug: "kalakaarian",
     image: { src: "/projects/kalakaarian.webp", alt: "Kalakaarian home page: 'Your next creator campaign starts here' with creator illustrations" },
     name: "Kalakaarian",
-    emoji: "🎨",
     tagline:
       "India's AI-powered influencer–brand marketplace, live in production.",
     description:
@@ -70,13 +72,12 @@ export const projects: Project[] = [
       live: "https://kalakaarian.com",
     },
     featured: true,
-    accent: ["#ff8a3d", "#ff3d8a"],
+    tint: "sand",
   },
   {
     slug: "atlas",
     image: { src: "/projects/atlas.webp", alt: "Atlas dashboard: globe with regional risk layers and a country instability index" },
     name: "Atlas",
-    emoji: "🌍",
     tagline:
       "India-first global news, market-sentiment & intelligence dashboard.",
     description:
@@ -96,7 +97,7 @@ export const projects: Project[] = [
       github: "https://github.com/WickTech/atlas",
     },
     featured: true,
-    accent: ["#2dd4bf", "#8b5cf6"],
+    tint: "blue",
     caseStudy: {
       problem:
         "Global-event intelligence is scattered across news, equities, and crypto — each behind its own flaky, rate-limited API, and almost none of it framed for an India-first reader. Naive dashboards that fan out to those APIs on every load go blank the moment one upstream throttles or fails. Atlas set out to fuse those streams into a single, India-centered pane that stays up even when its sources don't.",
@@ -146,7 +147,6 @@ export const projects: Project[] = [
     slug: "skyline",
     image: { src: "/projects/skyline.webp", alt: "Skyline showing current weather and air quality for London" },
     name: "Skyline",
-    emoji: "🌤️",
     tagline: "One search — current weather and air quality, anywhere.",
     description:
       "Skyline is a clean single-search weather and air-quality dashboard. Type a city, get the current conditions, a five-day forecast, and a live air-quality index in one view. Born from merging two earlier apps (WeatherNow + AirNow) into one focused product.",
@@ -165,12 +165,12 @@ export const projects: Project[] = [
       github: "https://github.com/WickTech/Skyline",
     },
     featured: false,
-    accent: ["#38bdf8", "#8b5cf6"],
+    tint: "blue",
   },
   {
     slug: "axion",
+    spec: "session → worktree → diff → approve → merge",
     name: "Axion",
-    emoji: "🛠️",
     tagline:
       "Mission control for AI coding agents: isolated worktrees, diff review, approval-gated merges.",
     description:
@@ -187,7 +187,7 @@ export const projects: Project[] = [
     ],
     links: { github: "https://github.com/WickTech/axion" },
     featured: true,
-    accent: ["#ff5e3a", "#ff8a3d"],
+    tint: "rose",
   },
 
   /* ---------------------------------------------------------------- */
@@ -197,7 +197,6 @@ export const projects: Project[] = [
     slug: "nimbus-ai",
     image: { src: "/projects/nimbus-ai.webp", alt: "Nimbus AI landing page: 'Ship an AI product, not boilerplate'" },
     name: "Nimbus AI",
-    emoji: "🌩️",
     tagline:
       "Production-shaped AI SaaS starter — streaming chat, auth, credit billing.",
     description:
@@ -216,13 +215,12 @@ export const projects: Project[] = [
       github: "https://github.com/WickTech/nimbus-ai",
     },
     featured: false,
-    accent: ["#60a5fa", "#8b5cf6"],
+    tint: "blue",
   },
   {
     slug: "lumen-rag",
     image: { src: "/projects/lumen-rag.webp", alt: "Lumen RAG live demo: load documents, ask a question, run retrieval eval" },
     name: "Lumen RAG",
-    emoji: "🔦",
     tagline:
       "A transparent, evaluated RAG engine — with a real IR-metric harness.",
     description:
@@ -241,12 +239,12 @@ export const projects: Project[] = [
       github: "https://github.com/WickTech/lumen-rag",
     },
     featured: true,
-    accent: ["#fbbf24", "#ff8a3d"],
+    tint: "sand",
   },
   {
     slug: "autoflow",
+    spec: "scrape → filter → dedup → summarize → publish",
     name: "autoflow",
-    emoji: "⚙️",
     tagline:
       "Pluggable content-automation pipeline, described in a tiny YAML file.",
     description:
@@ -262,13 +260,12 @@ export const projects: Project[] = [
     ],
     links: { github: "https://github.com/WickTech/autoflow" },
     featured: false,
-    accent: ["#a3e635", "#2dd4bf"],
+    tint: "sage",
   },
   {
     slug: "logipilot",
     image: { src: "/projects/logipilot.webp", alt: "LogiPilot merchant portal home page: 'Always moving forward'" },
     name: "LogiPilot",
-    emoji: "🚚",
     tagline:
       "Self-serve shipping MVP for small Indian businesses to ship anywhere.",
     description:
@@ -284,12 +281,12 @@ export const projects: Project[] = [
     ],
     links: { live: "https://logipilot-lac.vercel.app" },
     featured: false,
-    accent: ["#f59e0b", "#ff5e3a"],
+    tint: "sand",
   },
   {
     slug: "reddit-keyword-bot",
+    spec: "comment → keyword match → reply once",
     name: "Reddit Keyword Bot",
-    emoji: "🤖",
     tagline:
       "A Reddit (Devvit) bot that watches subreddits for keywords.",
     description:
@@ -305,12 +302,12 @@ export const projects: Project[] = [
     ],
     links: { github: "https://github.com/WickTech/RedBot" },
     featured: false,
-    accent: ["#ff5e3a", "#ff3d8a"],
+    tint: "rose",
   },
   {
     slug: "walletd",
+    spec: "every journal entry: sum of postings = 0",
     name: "walletd",
-    emoji: "💸",
     tagline:
       "Double-entry wallet & payments service with database-enforced ledger invariants.",
     description:
@@ -327,12 +324,12 @@ export const projects: Project[] = [
     ],
     links: { github: "https://github.com/WickTech/walletd" },
     featured: true,
-    accent: ["#34d399", "#0ea5e9"],
+    tint: "sage",
   },
   {
     slug: "stocky",
+    spec: "5y daily prices → Random Forest → direction + confidence",
     name: "stocky",
-    emoji: "📈",
     tagline:
       "Local ML signals for Indian equities & forex, with a Claude risk-manager co-pilot.",
     description:
@@ -348,12 +345,12 @@ export const projects: Project[] = [
     ],
     links: { github: "https://github.com/WickTech/stocky" },
     featured: false,
-    accent: ["#f472b6", "#fbbf24"],
+    tint: "rose",
   },
   {
     slug: "twinz-ai-studio",
+    spec: "script → voice → lip-sync → captions → review",
     name: "Twinz AI Studio",
-    emoji: "🎬",
     tagline:
       "Consented AI avatars and human-reviewed Shorts/Reels in English, Hindi and more.",
     description:
@@ -369,13 +366,12 @@ export const projects: Project[] = [
     ],
     links: {},
     featured: false,
-    accent: ["#c084fc", "#f472b6"],
+    tint: "blue",
   },
   {
     slug: "samya",
     image: { src: "/projects/samya.webp", alt: "Sāmya cloud kitchen home page with menu and WhatsApp order buttons" },
     name: "Sāmya",
-    emoji: "🥗",
     tagline: "Website for a wellness-focused cloud kitchen in Bhilai–Durg.",
     description:
       "A static-first, data-driven Next.js site for Sāmya, a pure-veg, high-protein cloud kitchen: menu of bowls, salads, sandwiches, smoothies and cold-pressed juices. A client project, rebuilt from a single-file site and deployed on Vercel. Source is private.",
@@ -390,12 +386,16 @@ export const projects: Project[] = [
     ],
     links: { live: "https://samya-tawny.vercel.app" },
     featured: false,
-    accent: ["#84cc16", "#f59e0b"],
+    tint: "sage",
   },
 ];
 
-export const featuredProjects = projects.filter((p) => p.featured);
-export const moreProjects = projects.filter((p) => !p.featured);
+// Projects with a screenshot and a live site lead; the rest follow (stable order).
+const rank = (p: Project) => (p.image && p.links.live ? 0 : 1);
+const byRank = (a: Project, b: Project) => rank(a) - rank(b);
+
+export const featuredProjects = projects.filter((p) => p.featured).sort(byRank);
+export const moreProjects = projects.filter((p) => !p.featured).sort(byRank);
 
 export function getProject(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);

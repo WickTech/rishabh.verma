@@ -1,8 +1,5 @@
-import Image from "next/image";
 import { featuredProjects, STATUS_LABEL } from "@/data/projects";
-
-const poster = (a: [string, string]) =>
-  `radial-gradient(120% 120% at 0% 0%,${a[0]}33,transparent 55%),radial-gradient(120% 120% at 100% 100%,${a[1]}33,transparent 55%),linear-gradient(160deg,var(--card-a),var(--card-b))`;
+import { ProjectVisual } from "./ProjectVisual";
 
 export function Featured() {
   const [flagship, ...rest] = featuredProjects;
@@ -11,65 +8,33 @@ export function Featured() {
     <section id="work" className="sec">
       <div className="wrap">
         <div className="sec-head reveal">
-          <div className="k">
-            <span className="kicker">Selected work</span>
-            <h2 className="display">Products I&apos;ve shipped</h2>
-          </div>
-          <span className="idx display stroke">04</span>
+          <h2 className="display">Selected work</h2>
+          <p className="sec-sub">Products I&apos;ve built and shipped.</p>
         </div>
 
         {/* Flagship */}
         <div className="flagship reveal">
           <div className="flagship-inner">
-            <div className={`poster${flagship.image ? " has-shot" : ""}`}>
-              {flagship.image ? (
-                <Image
-                  className="shot"
-                  src={flagship.image.src}
-                  alt={flagship.image.alt}
-                  fill
-                  priority
-                  sizes="(min-width: 900px) 560px, 100vw"
-                />
-              ) : (
-                <div className="flag-glow" />
-              )}
-              <div className="meta">
-                <span className="badge live">
-                  <span className="dot" style={{ height: 6, width: 6 }}>
-                    <span style={{ background: "var(--emerald)" }} />
-                    <span style={{ background: "var(--emerald)" }} />
-                  </span>
-                  Live in production
-                </span>
-                <span className="yr" style={{ color: "var(--tertiary)" }}>
-                  {flagship.year} · Flagship
-                </span>
-              </div>
-              {!flagship.image && (
-                <div className="big">
-                  {flagship.name.slice(0, 4)}
-                  <em>{flagship.name.slice(4)}</em>
-                </div>
-              )}
-              {flagship.links.live && (
-                <a
-                  href={flagship.links.live}
-                  target="_blank"
-                  rel="noopener"
-                  className="url"
-                >
-                  {flagship.links.live.replace(/^https?:\/\//, "")} <span>↗</span>
-                </a>
-              )}
+            <div className="poster has-shot">
+              <ProjectVisual
+                project={flagship}
+                priority
+                sizes="(min-width: 900px) 560px, 100vw"
+              />
             </div>
             <div className="body">
+              <div className="meta">
+                <span className={`badge ${flagship.status}`}>
+                  {STATUS_LABEL[flagship.status]}
+                </span>
+                <span className="yr">{flagship.year}</span>
+              </div>
               <h3 className="display">{flagship.tagline}</h3>
               <p>{flagship.description}</p>
               <ul className="hl">
                 {flagship.highlights.map((h) => (
                   <li key={h}>
-                    <svg viewBox="0 0 24 24">
+                    <svg viewBox="0 0 24 24" aria-hidden>
                       <path d="M20 6L9 17l-5-5" />
                     </svg>
                     {h}
@@ -92,7 +57,7 @@ export function Featured() {
                     target="_blank"
                     rel="noopener"
                   >
-                    Visit live site →
+                    Visit {flagship.links.live.replace(/^https?:\/\//, "")} →
                   </a>
                 )}
                 {flagship.links.github && (
@@ -107,36 +72,17 @@ export function Featured() {
 
         {/* Other featured */}
         <div className="feat-list">
-          {rest.map((p, i) => (
+          {rest.map((p) => (
             <article className="feat reveal" key={p.slug}>
-              <div
-                className={`poster${p.image ? " has-shot" : ""}`}
-                style={p.image ? undefined : { backgroundImage: poster(p.accent) }}
-              >
-                {p.image ? (
-                  <Image
-                    className="shot"
-                    src={p.image.src}
-                    alt={p.image.alt}
-                    fill
-                    sizes="(min-width: 820px) 300px, 100vw"
-                  />
-                ) : (
-                  <>
-                    <span className="em">{p.emoji}</span>
-                    <span className="num stroke display">0{i + 2}</span>
-                  </>
-                )}
+              <div className={`poster${p.image ? " has-shot" : ""}`}>
+                <ProjectVisual
+                  project={p}
+                  sizes="(min-width: 820px) 300px, 100vw"
+                />
               </div>
               <div className="body">
                 <div className="meta">
                   <span className={`badge ${p.status}`}>
-                    {p.status === "live" && (
-                      <span className="dot" style={{ height: 6, width: 6 }}>
-                        <span />
-                        <span />
-                      </span>
-                    )}
                     {STATUS_LABEL[p.status]}
                   </span>
                   <span className="yr">{p.year}</span>

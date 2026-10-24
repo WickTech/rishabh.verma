@@ -5,11 +5,7 @@ export function Experience() {
     <section id="experience" className="sec">
       <div className="wrap">
         <div className="sec-head reveal">
-          <div className="k">
-            <span className="kicker">Track record</span>
-            <h2 className="display">Experience</h2>
-          </div>
-          <span className="idx display stroke">03</span>
+          <h2 className="display">Experience</h2>
         </div>
 
         <div className="timeline">

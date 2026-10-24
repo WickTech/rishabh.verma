@@ -1,57 +1,24 @@
 import { profile } from "@/data/profile";
 import { projects } from "@/data/projects";
 
-const SHIPPED = projects.map((p) => `${p.emoji} ${p.name}`);
-
 const STATS = [
-  { n: String(projects.length), l: "Products shipped" },
+  { n: String(projects.length), l: "Projects built" },
   { n: "1", l: "Live marketplace" },
-  { n: "∞", l: "Full-stack + AI" },
-  { n: "Durg", l: "India, remote-ready" },
+  { n: "20+", l: "REST APIs built and documented" },
+  { n: "Remote", l: "Based in Durg, India" },
 ];
 
 export function Hero() {
   return (
     <section id="hero">
-      <div
-        className="aurora"
-        style={{
-          left: "-10%",
-          top: "12%",
-          height: "40vw",
-          width: "40vw",
-          background: "radial-gradient(circle,var(--electric-blue),transparent 70%)",
-        }}
-      />
-      <div
-        className="aurora"
-        style={{
-          right: "-8%",
-          top: "34%",
-          height: "36vw",
-          width: "36vw",
-          background: "radial-gradient(circle,var(--soft-purple),transparent 70%)",
-          animationDelay: "-8s",
-        }}
-      />
       <div className="wrap" style={{ width: "100%" }}>
         <div className="hero-grid">
           <div className="hero-left">
-            <div className="chip reveal">
-              <span className="dot">
-                <span />
-                <span />
-              </span>
-              <span className="lbl">{profile.role}</span>
-            </div>
+            <p className="hero-role reveal">{profile.role}</p>
             <h1 className="hero display">
-              {profile.headline.map((ln, i) => (
+              {profile.headline.map((ln) => (
                 <span className="line reveal" key={ln}>
-                  {i === profile.headline.length - 1 ? (
-                    <span className="flux">{ln}</span>
-                  ) : (
-                    ln
-                  )}
+                  {ln}
                 </span>
               ))}
             </h1>
@@ -60,27 +27,19 @@ export function Hero() {
               <a href="#work" className="btn-grad">
                 See the work <span className="arrow">→</span>
               </a>
+              <a href={profile.resume} className="btn-ghost" download>
+                Download CV
+              </a>
+              <a href="#services" className="text-link">
+                Hire me for a project
+              </a>
             </div>
             <div className="stats reveal">
               {STATS.map((s) => (
                 <div className="stat" key={s.l}>
-                  <div className="n">
-                    <span className="flux">{s.n}</span>
-                  </div>
+                  <div className="n">{s.n}</div>
                   <div className="l">{s.l}</div>
                 </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="ticker">
-        <div className="row">
-          <span className="tag">Shipped /</span>
-          <div className="marquee-mask">
-            <div className="marquee">
-              {[...SHIPPED, ...SHIPPED].map((s, i) => (
-                <span key={i}>{s}</span>
               ))}
             </div>
           </div>

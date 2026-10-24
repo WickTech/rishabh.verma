@@ -53,37 +53,30 @@ export function Services() {
     <section id="services" className="sec">
       <div className="wrap">
         <div className="sec-head reveal">
-          <div className="k">
-            <span className="kicker">Work with me</span>
-            <h2 className="display">Services</h2>
-          </div>
-          <span className="idx display stroke">06</span>
+          <h2 className="display">Freelance services</h2>
+          <p className="sec-sub">Fixed-price projects, scoped on a short call.</p>
         </div>
-        <div className="svc-grid">
+        <ul className="svc-list">
           {SERVICES.map((s) => (
-            <div key={s.title} className="exp glass svc reveal">
-              <h3 className="display">{s.title}</h3>
-              <p>{s.blurb}</p>
+            <li key={s.title} className="svc reveal">
+              <div className="svc-main">
+                <h3 className="display">{s.title}</h3>
+                <p>{s.blurb}</p>
+                <p className="svc-proof">
+                  {s.items.join(" · ")} — built before: {s.proof}
+                </p>
+              </div>
               <div className="svc-price">
                 <span className="from">from</span>
-                <span className="flux">{s.price}</span>
-                <span className="tl">· {s.timeline}</span>
+                <span className="amt">{s.price}</span>
+                <span className="tl">{s.timeline}</span>
               </div>
-              <ul>
-                {s.items.map((it) => (
-                  <li key={it}>
-                    <i style={{ background: "var(--secondary)" }} />
-                    {it}
-                  </li>
-                ))}
-              </ul>
-              <p className="svc-proof">Built before: {s.proof}</p>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
         <p className="svc-note reveal">
-          Fixed-price quotes after a short scope call. Prices are starting
-          points in INR, excluding GST and third-party costs (hosting, APIs).{" "}
+          Prices are starting points in INR, excluding GST and third-party costs
+          (hosting, APIs).{" "}
           <a href={`mailto:${profile.email}?subject=Project%20enquiry`}>
             Get a quote →
           </a>
