@@ -51,7 +51,9 @@ describe("POST /api/ask (stubbed Groq)", () => {
     const sent = JSON.parse(init.body as string);
     expect(sent.stream).toBe(true);
     expect(sent.temperature).toBe(0.2);
-    expect(sent.max_tokens).toBe(350);
+    expect(sent.model).toBe("openai/gpt-oss-20b");
+    expect(sent.max_tokens).toBe(1200);
+    expect(sent.reasoning_effort).toBe("low");
     expect(sent.messages[0].role).toBe("system");
     expect(sent.messages[0].content).toContain("project-atlas");
     expect(init.headers.Authorization).toBe("Bearer gsk_test");

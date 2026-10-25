@@ -95,7 +95,7 @@ export async function POST(req: Request) {
   // Groq retires models without notice and access varies per account, so a
   // 404 model_not_found moves on to the next candidate.
   const models = [
-    ...new Set([process.env.GROQ_MODEL, "llama-3.1-8b-instant", "llama-3.3-70b-versatile"]),
+    ...new Set([process.env.GROQ_MODEL, "openai/gpt-oss-20b", "openai/gpt-oss-120b"]),
   ].filter((m): m is string => Boolean(m));
 
   let upstream: Response | undefined;
@@ -110,7 +110,9 @@ export async function POST(req: Request) {
         body: JSON.stringify({
           model,
           temperature: 0.2,
-          max_tokens: 350,
+          // gpt-oss models spend part of the budget on reasoning; keep it low.
+          max_tokens: model.startsWith("openai/gpt-oss") ? 1200 : 350,
+          ...(model.startsWith("openai/gpt-oss") ? { reasoning_effort: "low" } : {}),
           stream: true,
           messages: [{ role: "system", content: system }, ...messages],
         }),
