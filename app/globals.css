@@ -2173,6 +2173,18 @@ header.nav .menu-btn {
   border-bottom: 0;
 }
 
+/* phone menu: the contact link is the last item, styled as the primary action */
+.mobile-cta a {
+  display: inline-block;
+  background: var(--hl);
+  color: var(--hl-ink);
+  border: var(--px-line) solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+  padding: 8px 14px;
+  font-family: var(--font-pixel);
+  font-size: 14px;
+}
+
 /* phones: tighter nav so brand and controls fit inside the frame */
 @media (max-width: 639px) {
   header.nav .brand {
