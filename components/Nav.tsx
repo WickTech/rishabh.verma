@@ -9,7 +9,6 @@ const LINKS = [
   { href: "#experience", label: "Experience" },
   { href: "#about", label: "About" },
   { href: "#services", label: "Services" },
-  { href: "#contact", label: "Contact" },
 ];
 
 export function Nav() {
@@ -54,7 +53,7 @@ export function Nav() {
               {open ? "Close" : "Menu"}
             </button>
             <ThemeToggle />
-            <a href={`mailto:${profile.email}`} className="btn-grad nav-cta">
+            <a href="#contact" className="btn-grad nav-cta">
               Get in touch
             </a>
           </div>
@@ -68,6 +67,11 @@ export function Nav() {
                 </a>
               </li>
             ))}
+            <li className="mobile-cta">
+              <a href="#contact" onClick={() => setOpen(false)}>
+                Get in touch
+              </a>
+            </li>
           </ul>
         )}
       </div>

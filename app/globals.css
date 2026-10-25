@@ -255,6 +255,7 @@ header.nav nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
 .brand {
   font-family: var(--font-display);
@@ -265,6 +266,9 @@ header.nav nav {
 }
 .navlinks {
   display: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   gap: 28px;
   list-style: none;
 }
@@ -2167,6 +2171,18 @@ header.nav .menu-btn {
 }
 .svc:last-child {
   border-bottom: 0;
+}
+
+/* phone menu: the contact link is the last item, styled as the primary action */
+.mobile-cta a {
+  display: inline-block;
+  background: var(--hl);
+  color: var(--hl-ink);
+  border: var(--px-line) solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+  padding: 8px 14px;
+  font-family: var(--font-pixel);
+  font-size: 14px;
 }
 
 /* phones: tighter nav so brand and controls fit inside the frame */
