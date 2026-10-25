@@ -19,7 +19,7 @@ export function Services() {
                 </p>
               </div>
               <div className="svc-price">
-                <span className="from">typically</span>
+                <span className="from">estimated</span>
                 <span className="amt">{s.timeline}</span>
               </div>
             </li>
