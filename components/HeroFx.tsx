@@ -36,7 +36,7 @@ export default function HeroFx() {
     let ink = "#111111";
     const trail = new Map<number, number>();
     const rings: { x: number; y: number; t: number }[] = [];
-    let last: { cx: number; cy: number } | null = null;
+    let last: { cx: number; cy: number; t: number } | null = null;
 
     const on = () => visible && !document.hidden && !reduce.matches;
 
@@ -62,18 +62,21 @@ export default function HeroFx() {
       raf = 0;
       ctx.clearRect(0, 0, w, h);
 
+      // Exponential fade: each frame keeps 94% of the alpha, so the tail
+      // dissolves quickly at the ends and lingers near the head.
+      const cols = Math.ceil(w / CELL);
       for (const [k, a] of trail) {
-        const na = a - 0.022;
-        if (na <= 0) {
+        const na = a * 0.94;
+        if (na < 0.02) {
           trail.delete(k);
           continue;
         }
         trail.set(k, na);
-        const cols = Math.ceil(w / CELL);
         ctx.globalAlpha = na;
-        ctx.fillStyle = hl;
+        ctx.fillStyle = na > 0.6 ? ink : hl;
         ctx.fillRect((k % cols) * CELL + 1, Math.floor(k / cols) * CELL + 1, CELL - 2, CELL - 2);
       }
+      ctx.globalAlpha = 1;
 
       ctx.fillStyle = ink;
       for (let n = rings.length - 1; n >= 0; n--) {
@@ -121,10 +124,14 @@ export default function HeroFx() {
       ctx.clearRect(0, 0, w, h);
     };
 
-    const mark = (cx: number, cy: number) => {
+    // Brightness follows pointer speed: a slow drag leaves a faint trail,
+    // a fast sweep leaves a bright one.
+    let speed = 0;
+    const mark = (cx: number, cy: number, strength: number) => {
       const cols = Math.ceil(w / CELL);
       if (cx < 0 || cy < 0 || cx >= cols || cy >= Math.ceil(h / CELL)) return;
-      trail.set(cy * cols + cx, 0.95);
+      const k = cy * cols + cx;
+      trail.set(k, Math.max(trail.get(k) ?? 0, strength));
     };
 
     const onMove = (e: PointerEvent) => {
@@ -132,13 +139,18 @@ export default function HeroFx() {
       const r = host.getBoundingClientRect();
       const cx = Math.floor((e.clientX - r.left) / CELL);
       const cy = Math.floor((e.clientY - r.top) / CELL);
+      const now = performance.now();
+      const dt = Math.max(now - (last?.t ?? now), 1);
+      const px = last ? Math.hypot(cx - last.cx, cy - last.cy) : 0;
+      speed = Math.min(px / dt, 1.5);
+      const strength = Math.min(0.35 + speed * 0.9, 1);
       if (last && (last.cx !== cx || last.cy !== cy)) {
         const steps = Math.max(Math.abs(cx - last.cx), Math.abs(cy - last.cy));
         for (let s = 1; s <= steps; s++) {
-          mark(Math.round(last.cx + ((cx - last.cx) * s) / steps), Math.round(last.cy + ((cy - last.cy) * s) / steps));
+          mark(Math.round(last.cx + ((cx - last.cx) * s) / steps), Math.round(last.cy + ((cy - last.cy) * s) / steps), strength);
         }
-      } else mark(cx, cy);
-      last = { cx, cy };
+      } else mark(cx, cy, strength);
+      last = { cx, cy, t: now };
       wake();
     };
 
