@@ -33,9 +33,11 @@ export function MoreProjects() {
                 ))}
               </div>
               <div className="links">
+                <a className="pri" href={`/projects/${p.slug}`}>
+                  Details →
+                </a>
                 {p.links.live && (
                   <a
-                    className="pri"
                     href={p.links.live}
                     target="_blank"
                     rel="noopener"

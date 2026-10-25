@@ -67,9 +67,9 @@ export function Nav() {
                 </a>
               </li>
             ))}
-            <li className="mobile-cta">
+            <li>
               <a href="#contact" onClick={() => setOpen(false)}>
-                Get in touch
+                Contact
               </a>
             </li>
           </ul>

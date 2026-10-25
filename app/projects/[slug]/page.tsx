@@ -90,18 +90,44 @@ export default async function ProjectPage({
           className="mx-auto max-w-4xl px-5 pb-16 pt-16 sm:px-8"
         >
           {/* Screenshot */}
-          {project.image && (
-            <div className="mt-12 overflow-hidden rounded-lg border border-glass">
-              <Image
-                src={project.image.src}
-                alt={project.image.alt}
-                width={project.image.fullPage?.width ?? 1440}
-                height={project.image.fullPage?.height ?? 900}
-                priority
-                sizes="(min-width: 1024px) 960px, 100vw"
-                className="block h-auto w-full"
-              />
+          {project.image?.fullPage ? (
+            <div className="mt-12">
+              <div className="long-shot">
+                <Image
+                  src={project.image.src}
+                  alt={project.image.alt}
+                  width={project.image.fullPage.width}
+                  height={project.image.fullPage.height}
+                  priority
+                  sizes="(min-width: 1024px) 960px, 100vw"
+                  className="block h-auto w-full"
+                />
+              </div>
+              {project.links.live && (
+                <a
+                  href={project.links.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-block text-on-surface underline underline-offset-4"
+                >
+                  View the full page on {project.links.live.replace(/^https?:\/\//, "")} ↗
+                </a>
+              )}
             </div>
+          ) : (
+            project.image && (
+              <div className="mt-12 overflow-hidden rounded-lg border border-glass">
+                <Image
+                  src={project.image.src}
+                  alt={project.image.alt}
+                  width={1440}
+                  height={900}
+                  priority
+                  sizes="(min-width: 1024px) 960px, 100vw"
+                  className="block h-auto w-full"
+                />
+              </div>
+            )
           )}
 
           {/* Metrics strip (case study) */}
