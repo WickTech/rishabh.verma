@@ -37,9 +37,6 @@ export function Hero() {
               <a href="#work" className="btn-grad">
                 See the work <span className="arrow">→</span>
               </a>
-              <a href={profile.resume} className="btn-ghost" download>
-                Download CV
-              </a>
               {askEnabled() && <AskHeroButton />}
               <a href="#services" className="text-link">
                 Hire me for a project

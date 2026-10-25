@@ -50,7 +50,7 @@ Content is data-driven; edit data, not components.
   tagline, description, role, year, stack[], status ('live' | 'oss' | 'wip'),
   highlights[], links{live?, github?}, featured, tint, image?, spec?, caseStudy?`.
 - **`data/profile.ts`**: name, role, hero copy, about text, toolbox, experience,
-  education, socials, résumé path.
+  education, socials.
 - **`components/Services.tsx`**: service rows and starting prices (INR).
 - **`public/projects/<slug>.webp`**: 1440x900 screenshots of live sites, referenced by `image` in `data/projects.ts`.
 
@@ -80,5 +80,5 @@ app/
 components/                # Hero, Featured, MoreProjects, ProjectVisual, Experience,
                            # About, Services, Contact, Nav, ThemeToggle, ...
 data/                      # projects.ts, profile.ts
-public/                    # og.png, Rishabh_Verma_CV.pdf, projects/*.webp
+public/                    # og.png, projects/*.webp
 ```

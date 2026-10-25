@@ -35,7 +35,6 @@ export const profile = {
   ],
   location: "Durg, Chhattisgarh, India",
   email: "rishabhverma.dev@gmail.com",
-  resume: "/Rishabh_Verma_CV.pdf",
   url: "https://rishabh-verma.vercel.app",
 
   // What I work with — shown in the About section
