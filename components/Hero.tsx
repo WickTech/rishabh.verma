@@ -8,8 +8,8 @@ import { AskHeroButton } from "./AskHeroButton";
 import { askEnabled } from "@/lib/ask/enabled";
 
 const STATS = [
-  { n: String(projects.length), l: "Projects built" },
-  { n: "1", l: "Live marketplace" },
+  { n: "10", l: "Open source work" },
+  { n: String(projects.filter((p) => p.links.live).length), l: "Shipped projects" },
   { n: "20+", l: "REST APIs built and documented" },
   { n: "Remote", l: "Based in Durg, India" },
 ];

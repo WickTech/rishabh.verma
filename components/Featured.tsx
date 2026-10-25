@@ -60,6 +60,9 @@ export function Featured() {
                     Visit {flagship.links.live.replace(/^https?:\/\//, "")} →
                   </a>
                 )}
+                <a href={`/projects/${flagship.slug}`}>
+                  {flagship.caseStudy ? "Case study →" : "Details →"}
+                </a>
                 {flagship.links.github && (
                   <a href={flagship.links.github} target="_blank" rel="noopener">
                     GitHub ↗
@@ -108,14 +111,12 @@ export function Featured() {
                       Visit live site →
                     </a>
                   )}
-                  {p.caseStudy && (
-                    <a
-                      className={p.links.live ? "" : "pri"}
-                      href={`/projects/${p.slug}`}
-                    >
-                      Case study →
-                    </a>
-                  )}
+                  <a
+                    className={p.links.live ? "" : "pri"}
+                    href={`/projects/${p.slug}`}
+                  >
+                    {p.caseStudy ? "Case study →" : "Details →"}
+                  </a>
                   {p.links.github && (
                     <a href={p.links.github} target="_blank" rel="noopener">
                       GitHub ↗
