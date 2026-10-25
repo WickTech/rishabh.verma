@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 
 /**
- * Rotating hero word. Every word is in the HTML (stacked in one grid cell, so
- * the box reserves the tallest/widest word and nothing shifts); only the active
- * one is visible. The first word is active on the server, so it reads without
- * JS. Rotation is skipped for reduced-motion and paused in hidden tabs.
+ * Slot-reel hero word. Every word is in the HTML, stacked in a column inside a
+ * one-line window, so the box reserves the widest word and nothing shifts; the
+ * reel slides to the active word. The first word shows on the server, so it
+ * reads without JS. Rotation is skipped for reduced-motion and
+ * paused in hidden tabs.
  */
 export function RotatingWord({ words }: { words: readonly string[] }) {
   const [i, setI] = useState(0);
@@ -16,7 +17,9 @@ export function RotatingWord({ words }: { words: readonly string[] }) {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     let id: number | undefined;
     const start = () => {
-      id = window.setInterval(() => setI((n) => (n + 1) % words.length), 2400);
+      id = window.setInterval(() => {
+        setI((n) => (n + 1) % words.length);
+      }, 2400);
     };
     const stop = () => {
       if (id !== undefined) window.clearInterval(id);
@@ -32,12 +35,12 @@ export function RotatingWord({ words }: { words: readonly string[] }) {
   }, [words.length]);
 
   return (
-    <span className="rotor" aria-hidden>
-      {words.map((w, n) => (
-        <span key={w} className={n === i ? "on" : undefined}>
-          {w}
-        </span>
-      ))}
+    <span className="rotor" aria-hidden style={{ "--i": i } as CSSProperties}>
+      <span className="reel">
+        {words.map((w) => (
+          <span key={w}>{w}</span>
+        ))}
+      </span>
     </span>
   );
 }

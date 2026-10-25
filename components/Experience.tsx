@@ -9,8 +9,11 @@ export function Experience() {
         </div>
 
         <div className="timeline">
-          {profile.experience.map((e) => (
+          {profile.experience.map((e, n) => (
             <div className="tl-item reveal" key={`${e.org}-${e.role}`}>
+              <span className="tl-n" aria-hidden>
+                {String(n + 1).padStart(2, "0")}
+              </span>
               <div className="tl-when">
                 {e.period}
                 <span className="tl-loc">{e.location}</span>

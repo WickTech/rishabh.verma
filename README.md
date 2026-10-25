@@ -9,7 +9,7 @@ Live: **https://rishabh-verma.vercel.app**
 
 Personal portfolio of a product builder and AI engineer. Shows built projects
 (with live-site screenshots), experience, a fixed-price freelance services
-section and per-project pages. Bold editorial design (heavy condensed headings, rotating hero word, rounded frame), light by default
+section and per-project pages. Bold editorial design with pixel craft (heavy condensed headings, monospace labels, hard-shadow blocks, pixel grid, slot-reel hero word, cursor pixel trail), light by default
 with a dark toggle.
 
 ## Stack
