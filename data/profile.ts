@@ -58,7 +58,7 @@ export const profile = {
     {
       role: "Founder",
       org: "Kalakaarian",
-      period: "2025 — Present",
+      period: "2026 — Present",
       location: "Durg, India",
       summary:
         "Building India's AI-powered creator–brand marketplace end to end. Live on real payments, escrow, and a full seven-stage campaign workflow.",
