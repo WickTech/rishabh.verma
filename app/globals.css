@@ -255,6 +255,7 @@ header.nav nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
 .brand {
   font-family: var(--font-display);
@@ -265,6 +266,9 @@ header.nav nav {
 }
 .navlinks {
   display: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   gap: 28px;
   list-style: none;
 }
