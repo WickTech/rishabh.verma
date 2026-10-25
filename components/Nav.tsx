@@ -54,7 +54,7 @@ export function Nav() {
               {open ? "Close" : "Menu"}
             </button>
             <ThemeToggle />
-            <a href={`mailto:${profile.email}`} className="btn-grad nav-cta">
+            <a href="#contact" className="btn-grad nav-cta">
               Get in touch
             </a>
           </div>
