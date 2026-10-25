@@ -32,3 +32,5 @@ next-env.d.ts
 
 # internal strategy notes (never publish)
 new.md
+.lighthouseci
+C:*

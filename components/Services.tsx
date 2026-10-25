@@ -1,4 +1,3 @@
-import { profile } from "@/data/profile";
 import { SERVICES } from "@/data/services";
 
 export function Services() {
@@ -7,7 +6,7 @@ export function Services() {
       <div className="wrap">
         <div className="sec-head reveal">
           <h2 className="display">Freelance services</h2>
-          <p className="sec-sub">Fixed-price projects, scoped on a short call.</p>
+          <p className="sec-sub">Quoted per project, after a short call about what you need.</p>
         </div>
         <ul className="svc-list">
           {SERVICES.map((s) => (
@@ -20,19 +19,16 @@ export function Services() {
                 </p>
               </div>
               <div className="svc-price">
-                <span className="from">from</span>
-                <span className="amt">{s.price}</span>
-                <span className="tl">{s.timeline}</span>
+                <span className="from">estimated</span>
+                <span className="amt">{s.timeline}</span>
               </div>
             </li>
           ))}
         </ul>
         <p className="svc-note reveal">
-          Prices are starting points in INR, excluding GST and third-party costs
-          (hosting, APIs).{" "}
-          <a href={`mailto:${profile.email}?subject=Project%20enquiry`}>
-            Get a quote →
-          </a>
+          Every project is different, so there is no price list. Tell me what
+          you are building and I will reply with a scoped quote.{" "}
+          <a href="#contact">Get a quote →</a>
         </p>
       </div>
     </section>
