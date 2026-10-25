@@ -109,7 +109,8 @@ export async function POST(req: Request) {
       }),
       signal: AbortSignal.timeout(20_000),
     });
-  } catch {
+  } catch (err) {
+    console.error("ask: groq request failed", err instanceof Error ? err.message : err);
     return json({ fallback: true, error: "The assistant is unavailable right now." }, 502);
   }
 
@@ -117,6 +118,7 @@ export async function POST(req: Request) {
     return json({ error: "The assistant is busy. Try again in a minute." }, 429);
   }
   if (!upstream.ok || !upstream.body) {
+    console.error("ask: groq error", upstream.status, (await upstream.text().catch(() => "")).slice(0, 300));
     return json({ fallback: true, error: "The assistant is unavailable right now." }, 502);
   }
 
