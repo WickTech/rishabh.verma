@@ -92,25 +92,38 @@ export async function POST(req: Request) {
     .join(" ");
   const system = buildSystemPrompt(retrieve(corpus, query));
 
-  let upstream: Response;
-  try {
-    upstream = await fetch(GROQ_URL, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${key}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: process.env.GROQ_MODEL || "llama-3.1-8b-instant",
-        temperature: 0.2,
-        max_tokens: 350,
-        stream: true,
-        messages: [{ role: "system", content: system }, ...messages],
-      }),
-      signal: AbortSignal.timeout(20_000),
-    });
-  } catch (err) {
-    console.error("ask: groq request failed", err instanceof Error ? err.message : err);
+  // Groq retires models without notice and access varies per account, so a
+  // 404 model_not_found moves on to the next candidate.
+  const models = [
+    ...new Set([process.env.GROQ_MODEL, "llama-3.1-8b-instant", "llama-3.3-70b-versatile"]),
+  ].filter((m): m is string => Boolean(m));
+
+  let upstream: Response | undefined;
+  for (const model of models) {
+    try {
+      upstream = await fetch(GROQ_URL, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${key}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model,
+          temperature: 0.2,
+          max_tokens: 350,
+          stream: true,
+          messages: [{ role: "system", content: system }, ...messages],
+        }),
+        signal: AbortSignal.timeout(20_000),
+      });
+    } catch (err) {
+      console.error("ask: groq request failed", err instanceof Error ? err.message : err);
+      return json({ fallback: true, error: "The assistant is unavailable right now." }, 502);
+    }
+    if (upstream.status !== 404) break;
+    console.error("ask: model unavailable", model);
+  }
+  if (!upstream) {
     return json({ fallback: true, error: "The assistant is unavailable right now." }, 502);
   }
 
