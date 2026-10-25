@@ -3,6 +3,7 @@ import { Archivo, Big_Shoulders, JetBrains_Mono } from "next/font/google";
 import { profile } from "@/data/profile";
 import { AskLauncher } from "@/components/AskLauncher";
 import { askEnabled } from "@/lib/ask/enabled";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 // Archivo — body and UI
@@ -84,6 +85,7 @@ export default function RootLayout({
       <body>
         <div className="frame">{children}</div>
         {askEnabled() && <AskLauncher />}
+        <Analytics />
       </body>
     </html>
   );

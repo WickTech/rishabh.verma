@@ -2,7 +2,7 @@
   "name": "portfolio",
   "version": "1.0.0",
   "private": true,
-  "description": "Rishabh Verma \u2014 product builder & AI engineer. Portfolio.",
+  "description": "Rishabh Verma — product builder & AI engineer. Portfolio.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,6 +11,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "next": "^15.5.21",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

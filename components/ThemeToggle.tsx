@@ -2,8 +2,7 @@
 
 /**
  * Dark/light theme toggle. Persists to localStorage under "rv-theme"
- * (read pre-paint by the inline script in layout.tsx) and fires a
- * "themechange" event so the network canvas re-tints.
+ * (read pre-paint by the inline script in layout.tsx).
  */
 export function ThemeToggle() {
   const toggle = () => {
@@ -13,7 +12,6 @@ export function ThemeToggle() {
     try {
       localStorage.setItem("rv-theme", light ? "light" : "dark");
     } catch {}
-    window.dispatchEvent(new Event("themechange"));
   };
 
   return (
