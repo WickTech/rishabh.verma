@@ -1,6 +1,9 @@
+import type { CSSProperties } from "react";
 import { profile } from "@/data/profile";
 import { projects } from "@/data/projects";
 import { RotatingWord } from "./RotatingWord";
+import { HeroLines } from "./HeroLines";
+import { HeroFxLoader } from "./HeroFxLoader";
 import { AskHeroButton } from "./AskHeroButton";
 import { askEnabled } from "@/lib/ask/enabled";
 
@@ -14,6 +17,8 @@ const STATS = [
 export function Hero() {
   return (
     <section id="hero">
+      <HeroFxLoader />
+      <HeroLines />
       <div className="wrap" style={{ width: "100%" }}>
         <div className="hero-grid">
           <div className="hero-left">
@@ -22,13 +27,13 @@ export function Hero() {
               <span className="sr-only">
                 I build {profile.heroVerbs.join(", ")} end to end.
               </span>
-              <span aria-hidden className="line reveal">
+              <span aria-hidden className="line drop" style={{ "--d": 0 } as CSSProperties}>
                 I build
               </span>
-              <span aria-hidden className="line accent reveal">
+              <span aria-hidden className="line accent drop" style={{ "--d": 1 } as CSSProperties}>
                 <RotatingWord words={profile.heroVerbs} />
               </span>
-              <span aria-hidden className="line reveal">
+              <span aria-hidden className="line drop" style={{ "--d": 2 } as CSSProperties}>
                 end to end.
               </span>
             </h1>
