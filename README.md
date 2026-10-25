@@ -51,7 +51,7 @@ Content is data-driven; edit data, not components.
   highlights[], links{live?, github?}, featured, tint, image?, spec?, caseStudy?`.
 - **`data/profile.ts`**: name, role, hero copy, about text, toolbox, experience,
   education, socials.
-- **`components/Services.tsx`**: service rows and starting prices (INR).
+- **`data/services.ts`**: service rows (no public prices; quoted per project via the contact form).
 - **`public/projects/<slug>.webp`**: 1440x900 screenshots of live sites, referenced by `image` in `data/projects.ts`.
 
 ### Adding a project

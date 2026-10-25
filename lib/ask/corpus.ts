@@ -14,7 +14,7 @@ const list = (xs: readonly string[]) => xs.join("; ");
 
 /**
  * Everything the assistant may say comes from here, built from the same data
- * files that render the site. Prices are deliberately left out: pricing
+ * files that render the site. Prices are not published: pricing
  * questions are redirected to the contact form.
  */
 export function buildCorpus(): Chunk[] {
@@ -45,7 +45,7 @@ export function buildCorpus(): Chunk[] {
     {
       id: "services",
       title: "Freelance services",
-      text: `Rishabh takes fixed-price freelance projects, scoped on a short call. Services: ${SERVICES.map(
+      text: `Rishabh takes freelance projects, quoted per project after a short call. Services: ${SERVICES.map(
         (s) => `${s.title} (${s.blurb} Built before: ${s.proof}.)`,
       ).join(" ")} Pricing depends on scope; point people to ${profile.url}/#services and the contact form.`,
     },
