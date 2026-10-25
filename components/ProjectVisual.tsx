@@ -11,6 +11,21 @@ export function ProjectVisual({
   sizes: string;
   priority?: boolean;
 }) {
+  if (project.image?.fullPage) {
+    const { width, height } = project.image.fullPage;
+    return (
+      <Image
+        className="shot full"
+        src={project.image.src}
+        alt={project.image.alt}
+        width={width}
+        height={height}
+        sizes={sizes}
+        priority={priority}
+        quality={85}
+      />
+    );
+  }
   if (project.image) {
     return (
       <Image

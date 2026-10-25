@@ -95,8 +95,8 @@ export default async function ProjectPage({
               <Image
                 src={project.image.src}
                 alt={project.image.alt}
-                width={1440}
-                height={900}
+                width={project.image.fullPage?.width ?? 1440}
+                height={project.image.fullPage?.height ?? 900}
                 priority
                 sizes="(min-width: 1024px) 960px, 100vw"
                 className="block h-auto w-full"

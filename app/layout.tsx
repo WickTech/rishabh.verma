@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Archivo, Big_Shoulders, JetBrains_Mono } from "next/font/google";
 import { profile } from "@/data/profile";
 import { AskLauncher } from "@/components/AskLauncher";
+import { BootScreen } from "@/components/BootScreen";
 import { askEnabled } from "@/lib/ask/enabled";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
@@ -83,6 +84,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
       <body>
+        <BootScreen />
         <div className="frame">{children}</div>
         {askEnabled() && <AskLauncher />}
         <Analytics />

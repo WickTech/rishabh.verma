@@ -15,7 +15,7 @@ export function Featured() {
         {/* Flagship */}
         <div className="flagship reveal">
           <div className="flagship-inner">
-            <div className="poster has-shot">
+            <div className={`poster has-shot${flagship.image?.fullPage ? " has-full" : ""}`}>
               <ProjectVisual
                 project={flagship}
                 priority

@@ -35,7 +35,8 @@ export interface Project {
   /** featured cards render large on the home page; the rest go in the grid */
   featured: boolean;
   /** screenshot of the live site (1440x900), shown on cards and the project page */
-  image?: { src: string; alt: string };
+  /** fullPage: the whole long page is shown at natural height, not cropped */
+  image?: { src: string; alt: string; fullPage?: { width: number; height: number } };
   /** one line of real substance shown on cards that have no screenshot */
   spec?: string;
   /** muted pastel used for the card tile and badges */
@@ -50,7 +51,11 @@ export const projects: Project[] = [
   /* ---------------------------------------------------------------- */
   {
     slug: "kalakaarian",
-    image: { src: "/projects/kalakaarian.webp", alt: "Kalakaarian home page: 'Your next creator campaign starts here' with creator illustrations" },
+    image: {
+      src: "/projects/kalakaarian-full.jpg",
+      alt: "Kalakaarian home page, full length: hero, how it works, creator categories, campaign workflow, pricing and footer",
+      fullPage: { width: 1440, height: 11042 },
+    },
     name: "Kalakaarian",
     tagline:
       "India's AI-powered influencer–brand marketplace, live in production.",

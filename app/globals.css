@@ -895,6 +895,24 @@ section.sec {
   object-fit: cover;
   object-position: top left;
 }
+/* long page: the card takes the height of the text beside it and shows the top of the page */
+.poster.has-full {
+  aspect-ratio: 16 / 10;
+}
+@media (min-width: 900px) {
+  .flagship .poster.has-full {
+    aspect-ratio: auto;
+    min-height: 0;
+  }
+}
+.shot.full {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+}
 .spec {
   position: absolute;
   inset: 0;
@@ -1525,9 +1543,10 @@ section.sec {
   align-items: center;
   gap: 12px;
   padding: 40px;
-  border-radius: 12px;
+  border-radius: 0;
   background: var(--surface);
-  border: 1px solid var(--line);
+  border: var(--px-line) solid var(--ink);
+  box-shadow: 6px 6px 0 var(--ink);
 }
 .form-ok .display {
   font-size: 1.6rem;
@@ -2020,6 +2039,119 @@ header.nav .tgl {
 }
 header.nav .menu-btn {
   font-size: 14px;
+}
+
+/* 1. cards press in like a physical button */
+.card:active,
+.feat:active,
+.flagship:active {
+  transform: translate(3px, 3px);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+/* 2. section headings type on in pixel steps when they enter view */
+.sec-head.in h2 {
+  animation: px-type 0.7s steps(14) both;
+}
+@keyframes px-type {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sec-head.in h2 {
+    animation: none;
+  }
+}
+
+/* 3. service rows highlight their title on hover */
+.svc h3 {
+  display: inline;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  transition: background 0.1s steps(2), color 0.1s steps(2);
+}
+.svc:hover h3 {
+  background: var(--hl);
+  color: var(--hl-ink);
+  padding: 0 4px;
+}
+
+
+/* 7. keyboard focus on pixel controls: thick ink outline */
+.btn-grad:focus-visible,
+.btn-ghost:focus-visible,
+.tgl:focus-visible,
+.menu-btn:focus-visible,
+.ask-fab:focus-visible,
+.navlinks a:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* 5. one-time boot screen (BootScreen) */
+.boot {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  animation: px-boot-out 0.25s steps(3) 0.85s forwards;
+  pointer-events: none;
+}
+.boot-name {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2rem, 8vw, 4.5rem);
+  text-transform: uppercase;
+  line-height: 1;
+}
+.boot-bar {
+  width: min(320px, 70vw);
+  height: 18px;
+  border: var(--px-line) solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+  padding: 2px;
+}
+.boot-bar span {
+  display: block;
+  height: 100%;
+  background: var(--hl);
+  transform-origin: left;
+  animation: px-fill 0.8s steps(10) both;
+}
+@keyframes px-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes px-boot-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* 6. scroll progress bar under the nav */
+.scroll-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 4px;
+  background: var(--hl);
+  transform-origin: left;
+  pointer-events: none;
 }
 
 /* services rows inside the pixel block */
