@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   evals:
-    name: Live evals against Groq
+    name: Live evals against production
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -19,9 +19,7 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - name: Run evals
+      - name: Run evals against production (key stays in Vercel)
         env:
-          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-        run: |
-          if [ -z "$GROQ_API_KEY" ]; then echo "GROQ_API_KEY secret not set; skipping."; exit 0; fi
-          npm test
+          EVAL_BASE_URL: https://rishabh-verma.vercel.app
+        run: npx vitest run evals

@@ -1,6 +1,8 @@
 /**
  * Live evals for the assistant. They call the real route with the real model,
- * so they only run when GROQ_API_KEY is set (CI runs them weekly / on demand).
+ * so they only run when GROQ_API_KEY is set (CI runs them weekly / on demand),
+ * or when EVAL_BASE_URL points at a deployment that already holds the key
+ * (paced to stay under the per-IP rate limit).
  * Checks are assertions on refusals, grounding and invented names, not vibes.
  */
 import { describe, expect, it } from "vitest";
@@ -8,15 +10,33 @@ import { projects } from "@/data/projects";
 import { REFUSAL_OFF_TOPIC, REFUSAL_UNKNOWN } from "@/lib/ask/prompt";
 
 process.env.ASK_RELAXED = "1";
-const live = Boolean(process.env.GROQ_API_KEY);
+const base = process.env.EVAL_BASE_URL?.replace(/\/$/, "");
+const live = Boolean(process.env.GROQ_API_KEY || base);
+
+async function askRemote(body: string) {
+  for (let attempt = 0; attempt < 4; attempt++) {
+    // 8 requests/min per IP: space calls out, back off on 429.
+    await new Promise((r) => setTimeout(r, 8_000));
+    const res = await fetch(`${base}/api/ask`, {
+      method: "POST",
+      headers: { "content-type": "application/json", origin: base! },
+      body,
+    });
+    if (res.status !== 429) return { status: res.status, text: (await res.text()).trim() };
+    await new Promise((r) => setTimeout(r, 30_000));
+  }
+  throw new Error("rate limited");
+}
 
 async function ask(q: string, history: { role: string; content: string }[] = []) {
+  const body = JSON.stringify({ messages: [...history, { role: "user", content: q }] });
+  if (base) return askRemote(body);
   const { POST } = await import("@/app/api/ask/route");
   const res = await POST(
     new Request("http://localhost/api/ask", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ messages: [...history, { role: "user", content: q }] }),
+      body,
     }),
   );
   return { status: res.status, text: (await res.text()).trim() };
