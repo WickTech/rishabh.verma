@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo, Big_Shoulders, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import { profile } from "@/data/profile";
 import { AskLauncher } from "@/components/AskLauncher";
 import { BootScreen } from "@/components/BootScreen";
@@ -7,26 +7,34 @@ import { askEnabled } from "@/lib/ask/enabled";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
+// Fonts are self-hosted (latin subset, variable weight files in app/fonts).
+// next/font/google downloads them from Google at build time, and that fetch
+// broke production builds on Vercel, so the build must not depend on it.
+
 // Archivo — body and UI
-const archivo = Archivo({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+const archivo = localFont({
+  src: "./fonts/Archivo-latin.woff2",
+  weight: "100 900",
+  style: "normal",
   variable: "--font-archivo",
   display: "swap",
 });
 
 // Big Shoulders: condensed heavy display face for headings
-const condensed = Big_Shoulders({
-  subsets: ["latin"],
-  weight: ["700", "900"],
+const condensed = localFont({
+  src: "./fonts/BigShoulders-latin.woff2",
+  weight: "100 900",
+  style: "normal",
   variable: "--font-condensed",
   display: "swap",
+  adjustFontFallback: false,
 });
 
 // JetBrains Mono — labels, badges, technical metadata
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
+const mono = localFont({
+  src: "./fonts/JetBrainsMono-latin.woff2",
+  weight: "100 800",
+  style: "normal",
   variable: "--font-jetbrains-mono",
   display: "swap",
 });
